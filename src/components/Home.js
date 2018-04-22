@@ -2,9 +2,11 @@ import React from 'react';
 
 const Home = () => (
     <div>
-        <h1>React Starter Template</h1>
+        <h1>React-Redux Starter Template</h1>
         <h3>This is my starting template for a React project!</h3>
         <ul>
+            <li><em>Redux</em></li>
+            <a href='https://github.com/zalmoxisus/redux-devtools-extension'><li>Redux DevTools Extension</li></a>
             <li>React Router</li>
             <li>SASS</li>
             <a href='https://necolas.github.io/normalize.css/'><li>Normalize.css</li></a>
