@@ -8,7 +8,8 @@
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "start": "node server/server.js",
-    "heroku-postbuild": "npm run build:prod"
+    "heroku-postbuild": "npm run build:prod",
+    "test": "jest --colors --config=jest.config.json"
   },
   "author": "",
   "license": "ISC",
@@ -31,7 +32,15 @@
     "redux": "^3.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^3.1.0",
+    "webpack": "^3.1.0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-to-json": "^3.0.1",
+    "jest": "^20.0.4",
+    "raf": "^3.3.2",
+    "react-test-renderer": "^16.0.0",
     "webpack-dev-server": "^2.5.1"
   }
 }
