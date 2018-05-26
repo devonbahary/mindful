@@ -6,7 +6,7 @@ const AppRouter = () => (
     <BrowserRouter>
         <div>
             <Switch>
-                <Route to='/' exact component={Home} />
+                <Route path='/' exact component={Home} />
             </Switch>
         </div>
     </BrowserRouter>
