@@ -16,6 +16,7 @@ const Home = () => (
                 <a href='https://babeljs.io/docs/plugins/transform-class-properties/'><li>Class properties transform</li></a>
                 <a href='https://babeljs.io/docs/plugins/transform-object-rest-spread/'><li>Object rest spread transform</li></a>
             </ul>
+            <li><a href='https://facebook.github.io/jest/en/'>Jest</a> testing w/<a href='http://airbnb.io/enzyme/'>Enzyme and ready file structure</a></li>
         </ul>
     </div>
 );
