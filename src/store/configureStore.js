@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
-import samplesReducer from '../reducers/samples';
+import topicsReducer from '../reducers/topics';
 
 export default () => createStore(
-  samplesReducer,
+  topicsReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
