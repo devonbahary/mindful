@@ -1,0 +1,42 @@
+.AddTopic {
+  min-height: 4rem;
+  @include box-shadow-gray();
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  margin-bottom: 1rem;
+
+  .AddTopic__label {
+    position: absolute;
+    top: $buffer-sm; left: $buffer-sm;
+    font-weight: bold;
+    opacity: 0.6;
+  }
+
+  .AddTopic__input {
+    line-height: 4rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: $buffer-lg;
+    border: none;
+  }
+
+  .AddTopic__input:focus {
+    outline: none;
+  }
+
+  .AddTopic__button {
+    position: relative;
+    border: none;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+      opacity: 0.4;
+    }
+  }
+
+  .AddTopic__input,
+  .AddTopic__button {
+    background-color: $bg-content;
+  }
+}

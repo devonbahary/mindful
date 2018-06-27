@@ -1,4 +1,5 @@
 import uuid from 'uuid';
+import moment from 'moment';
 
 // FETCH_TOPICS
 export const fetchTopics = () => ({
@@ -7,8 +8,7 @@ export const fetchTopics = () => ({
 
 // ADD_TOPIC
 export const addTopic = (topic = {
-  name = '',
-  description = ''
+  name = ''
 } = {}) => ({
   type: 'ADD_TOPIC',
   topic: {
@@ -33,13 +33,15 @@ export const removeTopic = ({ id }) => ({
 
 // ADD_TOPIC_POINT
 export const addTopicPoint = (topicId, point = {
-  text = ''
+  name = '',
+  type = 'note'
 } = {}) => ({
   type: 'ADD_TOPIC_POINT',
   topicId,
   point: {
     ...point,
-    id: uuid()
+    id: uuid(),
+    lastUpdated: moment.now()
   }
 });
 
@@ -48,7 +50,10 @@ export const editTopicPoint = (topicId, id, updates) => ({
   type: 'EDIT_TOPIC_POINT',
   topicId,
   id,
-  updates
+  updates: {
+    ...updates,
+    lastUpdated: moment.now()
+  }
 });
 
 // REMOVE_TOPIC_POINT

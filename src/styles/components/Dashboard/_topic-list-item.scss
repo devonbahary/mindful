@@ -1,0 +1,25 @@
+.TopicListItem {
+  background: $bg-content;
+  min-height: 4rem;
+  @include box-shadow-gray();
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  margin-bottom: $buffer-sm;
+
+  .TopicListItem__title {
+    line-height: 4rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: $buffer-sm;
+  }
+
+  .TopicListItem__button {
+    position: relative;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+      opacity: 0.4;
+    }
+  }
+}

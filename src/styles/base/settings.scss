@@ -1,1 +1,21 @@
+$bg-theme: #FFBB00;
+$bg-background: #E8E8E8;
+$bg-content: #FAFAFA;
 
+$buffer-sm: 6px;
+$buffer-lg: 12px;
+
+@mixin box-shadow-gray() {
+  box-shadow: 0 0 5px gray;
+}
+
+@mixin box-shadow-gray-lg() {
+  box-shadow: 0 0 15px gray;
+}
+
+@mixin center() {
+  position: absolute;
+  top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
