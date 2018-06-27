@@ -1,0 +1,8 @@
+.TopicPointsList {
+
+  .TopicPointsList__emptyIcon {
+    @include center();
+    font-size: 64px;
+    opacity: 0.4;
+  }
+}

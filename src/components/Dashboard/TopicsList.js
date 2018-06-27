@@ -1,24 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import selectTopics from '../../selectors/topics';
 import TopicsListItem from './TopicsListItem';
 
 const TopicsList = ({ topics }) => (
   <div>
-    <h3>Your Topics</h3>
-    {topics.length > 0 ? (
-      topics.map(topic => (
+    <ul>
+      {topics.map(topic => (
         <li key={topic.id}>
           <TopicsListItem topic={topic} />
         </li>
-      ))
-    ) : (
-      <p>No topics found.</p>
-    )}
+      ))}
+    </ul>
   </div>
 );
 
 const mapStateToProps = (state ) => ({
-  topics: state.topics
+  topics: selectTopics(state.topics, state.topicsFilter)
 });
 
 export default connect(mapStateToProps)(TopicsList);

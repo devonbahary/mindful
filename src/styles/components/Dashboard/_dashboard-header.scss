@@ -1,0 +1,69 @@
+.DashboardHeader,
+.DashboardHeader--search {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  height: 3rem;
+  @include box-shadow-gray();
+  -webkit-transition: background-color 0.25s ease-out;
+          transition: background-color 0.25s ease-out;
+  z-index: 1;
+
+  .DashboardHeader__mainButton {
+    position: relative;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+    }
+  }
+}
+
+.DashboardHeader {
+  background: $bg-theme;
+  color: white;
+
+  .DashboardHeader__contents {
+    position: relative;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    line-height: 3rem;
+
+    .DashboardHeader__searchButton {
+      position: absolute;
+      top: 0; bottom: 0; right: 0;
+      width: 64px;
+
+      .icon {
+        @include center();
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.DashboardHeader--search {
+  background: $bg-content;
+  color: gray;
+
+  input {
+    height: 100%;
+    background: none;
+    border: none;
+    animation: appear 0.5s ease-out;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

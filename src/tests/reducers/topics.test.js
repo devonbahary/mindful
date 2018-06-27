@@ -19,18 +19,14 @@ beforeEach(() => {
 // @@INIT
 test('should set up default state', () => {
   const state = topicsReducer(undefined, { type: '@@INIT' });
-  expect(state).toEqual({
-    topics: []
-  });
+  expect(state).toEqual([]);
 });
 
 // FETCH_TOPICS
 test('should fetch topics from localStorage', () => {
   const action = fetchTopics();
   const state = topicsReducer(undefined, action);
-  expect(state).toEqual({
-    topics
-  });
+  expect(state).toEqual(topics);
 });
 
 // ADD_TOPIC
@@ -41,13 +37,11 @@ test('should add topic to state and save to localStorage', () => {
   };
   const action = addTopic(topic);
   const state = topicsReducer(undefined, action);
-  expect(state).toEqual({
-    topics: [{
-      ...topic,
-      points: [],
-      id: expect.any(String)
-    }]
-  });
+  expect(state).toEqual([{
+    ...topic,
+    points: [],
+    id: expect.any(String)
+  }]);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual([{
@@ -64,7 +58,7 @@ test('should edit topic in state and update localStorage', () => {
     description: 'A series of personal writings by Marcus Aurelius about Stoicism.'
   };
   const action = editTopic(id, updates);
-  const state = topicsReducer({ topics }, action);
+  const state = topicsReducer(topics, action);
 
   const updatedTopics = [
     topics[0],
@@ -73,9 +67,7 @@ test('should edit topic in state and update localStorage', () => {
       ...updates
     }
   ];
-  expect(state).toEqual({
-    topics: updatedTopics
-  });
+  expect(state).toEqual(updatedTopics);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual(updatedTopics);
@@ -85,12 +77,10 @@ test('should edit topic in state and update localStorage', () => {
 test('should remove topic from state and update localStorage', () => {
   const topic = topics[0];
   const action = removeTopic(topic);
-  const state = topicsReducer({ topics }, action);
+  const state = topicsReducer(topics, action);
 
   const updatedTopics = [topics[1]];
-  expect(state).toEqual({
-    topics: updatedTopics
-  });
+  expect(state).toEqual(updatedTopics);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual(updatedTopics);
@@ -103,7 +93,7 @@ test('should add topic point to topic in state and save to localStorage', () => 
   };
   const topicId = topics[0].id;
   const action = addTopicPoint(topicId, point);
-  const state = topicsReducer({ topics }, action);
+  const state = topicsReducer(topics, action);
 
   const updatedTopics = topics.map(topic => topic.id === topicId ? ({
     ...topic,
@@ -115,9 +105,7 @@ test('should add topic point to topic in state and save to localStorage', () => 
       }
     ]
   }) : topic);
-  expect(state).toEqual({
-    topics: updatedTopics
-  });
+  expect(state).toEqual(updatedTopics);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual(updatedTopics);
@@ -131,7 +119,7 @@ test('should edit topic point in topic in state and update localStorage', () => 
   const topicId = topics[0].id;
   const id = topics[0].points[0].id;
   const action = editTopicPoint(topicId, id, updates);
-  const state = topicsReducer({ topics }, action);
+  const state = topicsReducer(topics, action);
 
   const updatedTopics = topics.map(topic => topic.id === topicId ? ({
     ...topic,
@@ -140,9 +128,7 @@ test('should edit topic point in topic in state and update localStorage', () => 
       ...updates
     }) : point)
   }) : topic);
-  expect(state).toEqual({
-    topics: updatedTopics
-  });
+  expect(state).toEqual(updatedTopics);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual(updatedTopics);
@@ -153,15 +139,13 @@ test('should remove topic point from topic in state and update localStorage', ()
   const topicId = topics[0].id;
   const id = points[1].id;
   const action = removeTopicPoint(topicId, points[1]);
-  const state = topicsReducer({ topics }, action);
+  const state = topicsReducer(topics, action);
 
   const updatedTopics = topics.map(topic => topic.id === topicId ? ({
     ...topic,
     points: topic.points.filter(point => point.id !== id)
   }) : topic);
-  expect(state).toEqual({
-    topics: updatedTopics
-  });
+  expect(state).toEqual(updatedTopics);
 
   const storage = JSON.parse(localStorage.getItem('topics'));
   expect(storage).toEqual(updatedTopics);

@@ -64,6 +64,7 @@ test('should set up remove topic object', () => {
 // ADD_TOPIC_POINT
 test('should set up add topic point object', () => {
   const point = {
+    name: 'Description',
     text: 'The Meditations is divided into 12 books that chronicle different periods of Marcus\' life.'
   };
   const topicId = '123abc';

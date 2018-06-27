@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { fetchTopics } from '../actions/topics';
-import Dashboard from '../components/Dashboard';
-import Topic from '../components/Topic';
+import Dashboard from '../components/Dashboard/Dashboard';
+import Topic from '../components/Topics/Topic';
 
 class AppRouter extends React.Component {
   componentWillMount() {
@@ -13,12 +13,12 @@ class AppRouter extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <main id="main-content">
           <Switch>
             <Route path='/' exact component={Dashboard} />
             <Route path='/topics/:id' component={Topic} />
           </Switch>
-        </div>
+        </main>
       </BrowserRouter>
     );
   }

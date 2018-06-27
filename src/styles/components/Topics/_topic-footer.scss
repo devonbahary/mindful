@@ -1,0 +1,27 @@
+.TopicFooter {
+  position: fixed;
+  right: $buffer-lg; bottom: 0; left: $buffer-lg;
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  height: 3rem;
+  background: $bg-content;
+  @include box-shadow-gray-lg();
+  line-height: 3rem;
+  font-size: 1.2rem;
+
+  .TopicFooter__textBox {
+    padding-left: $buffer-sm;
+    opacity: 0.8;
+  }
+
+  .TopicFooter__button {
+    position: relative;
+    background: none;
+    border: none;
+
+    .icon {
+      @include center();
+      font-size: 24px;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.TopicPointItem {
+  background: $bg-content;
+  margin: $buffer-lg;
+  @include box-shadow-gray();
+  border-radius: 2px;
+  min-height: 2rem;
+
+  .TopicPointItem__header {
+    min-height: 1.5rem;
+    background: $bg-background;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: $buffer-sm;
+    @include box-shadow-gray();
+  }
+
+  .TopicPointItem__contents {
+    padding: $buffer-sm $buffer-lg;
+    opacity: 0.8;
+    white-space: pre-wrap;
+
+    .TopicPointItem__list {
+      .TopicPointItem__listItem {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        margin-bottom: $buffer-sm;
+
+        .TopicPointItem__listItemBullet {
+          position: relative;
+
+          .icon {
+            @include center();
+            font-size: 8px;
+          }
+        }
+      }
+    }
+  }
+}
