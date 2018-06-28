@@ -2,16 +2,23 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { removeTopic } from '../../actions/topics';
+import ConfirmModal from './ConfirmModal';
 
 class TopicHeaderPopup extends React.Component {
+  state = {
+    isDeleteTopicModalOpen: false
+  };
 
-  handleRemove = () => {
-    if (window.confirm(`Remove topic ${this.props.topic.name}?`)) {
-      this.props.removeTopic(this.props.topic);
-      this.props.history.goBack();
-    } else {
-      this.props.onClose();
-    }
+  openDeleteTopicModal = () => this.setState(() => ({ isDeleteTopicModalOpen: true }));
+
+  handleConfirmDeleteTopicModal = () => {
+    this.props.removeTopic(this.props.topic);
+    this.props.history.goBack();
+  };
+
+  handleRequestCloseDeleteTopicModal = () => {
+    this.setState(() => ({ isDeleteTopicModalOpen: false }));
+    this.props.onClose();
   };
 
   render() {
@@ -31,7 +38,7 @@ class TopicHeaderPopup extends React.Component {
           </div>
           <div
             className="TopicHeaderPopup__menuItem"
-            onClick={this.handleRemove}
+            onClick={this.openDeleteTopicModal}
           >
             <div className="TopicHeaderPopup__menuItemIcon">
               <div className="icon ion-md-trash" />
@@ -42,6 +49,12 @@ class TopicHeaderPopup extends React.Component {
           </div>
         </div>
         <div className="TopicHeaderPopup__overlay" onClick={this.props.onClose} />
+        <ConfirmModal
+          isOpen={this.state.isDeleteTopicModalOpen}
+          onRequestClose={this.handleRequestCloseDeleteTopicModal}
+          onConfirm={this.handleConfirmDeleteTopicModal}
+          prompt="Delete this topic?"
+        />
       </div>
     );
   }

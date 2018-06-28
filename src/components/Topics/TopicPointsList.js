@@ -5,7 +5,7 @@ import TopicPointItem from './TopicPointItem';
 
 const TopicPointsList = ({ topic, points, openTopicPointModal }) => (
   <div className="TopicPointsList">
-    {topic && points.length > 0 ? (
+    {topic && points.length > 0 && (
       <ul>
         {points.map(point => (
           <li key={point.id}>
@@ -13,8 +13,6 @@ const TopicPointsList = ({ topic, points, openTopicPointModal }) => (
           </li>
         ))}
       </ul>
-    ) : (
-      <div className="TopicPointsList__emptyIcon ion-md-bulb" />
     )}
   </div>
 );

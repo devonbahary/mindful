@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addTopicPoint, editTopicPoint, removeTopicPoint } from '../../actions/topics';
 import Textarea from 'react-textarea-autosize';
+import ConfirmModal from './ConfirmModal';
 import Modal from '../Modal';
 import _ from 'lodash';
 import moment from 'moment';
@@ -11,7 +12,8 @@ class TopicPointModal extends React.Component {
     name: this.props.point ? this.props.point.name : '',
     type: this.props.point ? this.props.point.type : this.props.pointType,
     text: this.props.point ? this.props.point.text : '',
-    bullets: this.props.point ? this.props.point.bullets : []
+    bullets: this.props.point ? this.props.point.bullets : [],
+    isDeleteTopicPointModalOpen: false
   };
 
   handleNameChange = (e) => {
@@ -74,16 +76,19 @@ class TopicPointModal extends React.Component {
     this.handleRequestClose();
   };
 
-  handleRemove = () => {
-    if (confirm('Remove this point?')) {
-      this.props.removeTopicPoint();
-      this.props.onRequestClose();
-      this.setState(() => ({
-        name: '',
-        text: '',
-        bullets: []
-      }));
-    }
+  openDeleteTopicPointModal = () => this.setState(() => ({ isDeleteTopicPointModalOpen: true }));
+
+  handleRequestCloseDeleteTopicPointModal = () => this.setState(() => ({ isDeleteTopicPointModalOpen: false }));
+
+  handleConfirmDeleteTopicPointModal = () => {
+    this.props.removeTopicPoint();
+    this.props.onRequestClose();
+    this.setState(() => ({
+      name: '',
+      text: '',
+      bullets: [],
+      isDeleteTopicPointModalOpen: false
+    }));
   };
 
   handleRequestClose = () => {
@@ -164,7 +169,7 @@ class TopicPointModal extends React.Component {
         </form>
         {this.props.point && (
           <footer className="TopicPointForm__footer">
-            <div className="TopicPointForm__footerButton" onClick={this.handleRemove}>
+            <div className="TopicPointForm__footerButton" onClick={this.openDeleteTopicPointModal}>
               <div className="icon ion-md-trash" />
             </div>
             <div className="TopicPointForm__footerInfoBox">
@@ -172,6 +177,12 @@ class TopicPointModal extends React.Component {
             </div>
           </footer>
         )}
+        <ConfirmModal
+          isOpen={this.state.isDeleteTopicPointModalOpen}
+          onRequestClose={this.handleRequestCloseDeleteTopicPointModal}
+          onConfirm={this.handleConfirmDeleteTopicPointModal}
+          prompt="Delete this note?"
+        />
       </Modal>
     );
   }

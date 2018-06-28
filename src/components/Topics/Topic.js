@@ -48,6 +48,7 @@ class Topic extends React.Component {
           isModalOpen={this.state.isTopicPointModalOpen}
           onRequestClose={this.handleCloseTopicPointModal}
         />
+        <div className="Topic__bgIcon ion-md-bulb" />
       </div>
     );
   }

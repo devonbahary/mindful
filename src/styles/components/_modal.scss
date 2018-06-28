@@ -54,10 +54,13 @@
   }
 }
 
+.Modal:focus {
+  outline: none;
+}
+
 .ModalOverlay {
-  position: fixed;
-  height: 100vh;
+  position: absolute;
+  background: $bg-overlay;
   width: 100vw;
-  background: rgba(50, 50, 50, 0.2);
-  z-index: 1;
+  height: 100vh;
 }

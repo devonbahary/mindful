@@ -1,0 +1,48 @@
+.ConfirmModal {
+  position: fixed;
+  background: $bg-content;
+  @include center();
+  @include box-shadow-gray-lg();
+  z-index: 1;
+  width: 80%;
+  border-radius: 6px;
+
+  .ConfirmModal__body {
+    padding: $buffer-lg;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .ConfirmModal__footer {
+    height: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    .ConfirmModal__footerButton,
+    .ConfirmModal__footerButton--confirm {
+      background: none;
+      border: none;
+      text-transform: uppercase;
+    }
+
+    .ConfirmModal__footerButton {
+      opacity: 0.6;
+    }
+    .ConfirmModal__footerButton--confirm {
+      font-weight: bold;
+      color: $bg-theme;
+    }
+  }
+}
+
+.ConfirmModal:focus {
+  outline: none;
+}
+
+.ConfirmModalOverlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: $bg-overlay;
+  z-index: 1;
+}
