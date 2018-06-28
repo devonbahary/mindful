@@ -101,7 +101,8 @@ test('should add topic point to topic in state and save to localStorage', () => 
       ...topics[0].points,
       {
         ...point,
-        id: expect.any(String)
+        id: expect.any(String),
+        lastUpdated: expect.any(Number)
       }
     ]
   }) : topic);
@@ -125,7 +126,8 @@ test('should edit topic point in topic in state and update localStorage', () => 
     ...topic,
     points: topic.points.map(point => point.id === id ? ({
       ...point,
-      ...updates
+      ...updates,
+      lastUpdated: expect.any(Number)
     }) : point)
   }) : topic);
   expect(state).toEqual(updatedTopics);

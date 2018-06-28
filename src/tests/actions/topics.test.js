@@ -74,7 +74,8 @@ test('should set up add topic point object', () => {
     topicId,
     point: {
       ...point,
-      id: expect.any(String)
+      id: expect.any(String),
+      lastUpdated: expect.any(Number)
     }
   });
 });
@@ -91,7 +92,10 @@ test('should set up edit topic point object', () => {
     type: 'EDIT_TOPIC_POINT',
     topicId,
     id,
-    updates
+    updates: {
+      ...updates,
+      lastUpdated: expect.any(Number)
+    }
   });
 });
 
