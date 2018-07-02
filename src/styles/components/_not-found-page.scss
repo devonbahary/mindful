@@ -1,0 +1,36 @@
+.NotFoundPage {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+
+  .NotFoundPage__contents {
+    @include center();
+    text-align: center;
+
+    .NotFoundPage__bgIcon,
+    h1,
+    p {
+      opacity: 0.4;
+    }
+
+    .NotFoundPage__bgIcon {
+      font-size: 64px;
+    }
+
+    button {
+      background: $bg-content;
+      border: none;
+      @include box-shadow-gray();
+      padding: $buffer-sm $buffer-lg;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .NotFoundPage{
+    button:hover {
+      background: $bg-content-hover;
+    }
+  }
+}
