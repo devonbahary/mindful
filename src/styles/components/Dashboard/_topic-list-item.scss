@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 1fr 64px;
   margin-bottom: $buffer-sm;
+  cursor: pointer;
 
   .TopicListItem__title {
     line-height: 4rem;
@@ -21,5 +22,11 @@
       font-size: 32px;
       opacity: 0.4;
     }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .TopicListItem:hover {
+    @include box-shadow-gray-lg();
   }
 }

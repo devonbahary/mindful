@@ -4,6 +4,7 @@
   @include box-shadow-gray();
   border-radius: 2px;
   min-height: 2rem;
+  cursor: pointer;
 
   .TopicPointItem__header {
     min-height: 1.5rem;
@@ -15,6 +16,7 @@
   }
 
   .TopicPointItem__contents {
+    display: grid;
     padding: $buffer-sm $buffer-lg;
     opacity: 0.8;
     white-space: pre-wrap;
@@ -35,5 +37,15 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .TopicPointItem {
+    min-height: 4rem;
+  }
+
+  .TopicPointItem:hover {
+    @include box-shadow-gray-lg();
   }
 }

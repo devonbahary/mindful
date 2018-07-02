@@ -13,6 +13,7 @@ class TopicHeader extends React.Component {
   handleMainButtonClick = () => {
     if (this.state.isSearch) {
       this.setState(() => ({ isSearch: false }));
+      this.props.setPointsFilter('');
     } else {
       this.props.history.goBack();
     }
@@ -35,13 +36,6 @@ class TopicHeader extends React.Component {
   handleOpenTopicEditModal = () => {
     this.togglePopup();
     this.props.openTopicEditModal();
-  };
-
-  handleBlur = () => {
-    setTimeout(() => {
-      this.setState(() => ({ isSearch: false }));
-      this.props.setPointsFilter('');
-    }, 0);
   };
 
   render() {
