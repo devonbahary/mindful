@@ -5,6 +5,7 @@ import TopicHeader from './TopicHeader';
 import TopicFooter from './TopicFooter';
 import TopicEditModal from './TopicEditModal';
 import TopicPointModal from './TopicPointModal';
+import NotFoundPage from '../NotFoundPage';
 
 
 class Topic extends React.Component {
@@ -31,26 +32,30 @@ class Topic extends React.Component {
   }));
 
   render() {
-    return (
-      <div className="Topic">
-        <TopicHeader topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} />
-        <TopicPointsList topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
-        <TopicFooter topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
-        <TopicEditModal
-          topic={this.props.topic}
-          isModalOpen={this.state.isTopicEditModalOpen}
-          onRequestClose={this.handleCloseTopicEditModal}
-        />
-        <TopicPointModal
-          topic={this.props.topic}
-          point={this.state.topicPointModalPoint}
-          pointType={this.state.topicPointModalType}
-          isModalOpen={this.state.isTopicPointModalOpen}
-          onRequestClose={this.handleCloseTopicPointModal}
-        />
-        <div className="Topic__bgIcon ion-md-bulb" />
-      </div>
-    );
+    if (this.props.topic) {
+      return (
+        <div className="Topic">
+          <TopicHeader topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} />
+          <TopicPointsList topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
+          <TopicFooter topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
+          <TopicEditModal
+            topic={this.props.topic}
+            isModalOpen={this.state.isTopicEditModalOpen}
+            onRequestClose={this.handleCloseTopicEditModal}
+          />
+          <TopicPointModal
+            topic={this.props.topic}
+            point={this.state.topicPointModalPoint}
+            pointType={this.state.topicPointModalType}
+            isModalOpen={this.state.isTopicPointModalOpen}
+            onRequestClose={this.handleCloseTopicPointModal}
+          />
+          <div className="Topic__bgIcon ion-md-bulb" />
+        </div>
+      );
+    } else {
+      return <NotFoundPage />
+    }
   }
 
 }

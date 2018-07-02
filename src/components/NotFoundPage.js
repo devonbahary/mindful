@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 class NotFoundPage extends React.Component {
   handleClick = () => {
@@ -21,4 +22,4 @@ class NotFoundPage extends React.Component {
   }
 }
 
-export default NotFoundPage;
+export default withRouter(NotFoundPage);
