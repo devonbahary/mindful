@@ -4,7 +4,7 @@ import selectTopics from '../../selectors/topics';
 import TopicsListItem from './TopicsListItem';
 
 const TopicsList = ({ topics }) => (
-  <div>
+  <div className="TopicsList">
     <ul>
       {topics.map(topic => (
         <li key={topic.id}>

@@ -19,3 +19,7 @@ ul {
   overflow-y: scroll;
   min-height: 500px;
 }
+
+#main-content::-webkit-scrollbar {
+  display: none;
+}
