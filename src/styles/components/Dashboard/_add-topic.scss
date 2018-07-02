@@ -27,6 +27,7 @@
   .AddTopic__button {
     position: relative;
     border: none;
+    cursor: pointer;
 
     .icon {
       @include center();

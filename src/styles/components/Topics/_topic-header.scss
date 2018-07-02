@@ -12,6 +12,7 @@
 
   .TopicHeader__mainButton {
     position: relative;
+    cursor: pointer;
 
     .icon {
       @include center();
@@ -31,6 +32,7 @@
     .TopicHeader__popupButton,
     .TopicHeader__popupButton--active {
       position: relative;
+      cursor: pointer;
 
       .icon {
         @include center();

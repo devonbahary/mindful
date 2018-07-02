@@ -23,6 +23,7 @@
       background: none;
       border: none;
       text-transform: uppercase;
+      cursor: pointer;
     }
 
     .ConfirmModal__footerButton {
@@ -45,4 +46,21 @@
   height: 100vh;
   background: $bg-overlay;
   z-index: 1;
+}
+
+@media only screen and (min-width: 600px) {
+  .ConfirmModal {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .ConfirmModal {
+    width: 40%;
+
+    .ConfirmModal__footerButton:hover,
+    .ConfirmModal__footerButton--confirm:hover {
+      background: $bg-content-hover;
+    }
+  }
 }

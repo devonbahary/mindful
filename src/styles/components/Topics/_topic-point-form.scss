@@ -30,6 +30,11 @@
     white-space: pre-wrap;
   }
 
+  textarea::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+
   textarea:focus {
     outline: none;
   }
@@ -45,6 +50,7 @@
     position: relative;
     width: 48px;
     height: 100%;
+    cursor: pointer;
 
     .icon {
       @include center();
@@ -60,4 +66,13 @@
     font-style: italic;
     line-height: 2.5rem;
   }
+}
+
+.TopicPointForm::-webkit-scrollbar {
+  background: rgba(25, 25, 25, 0.1);
+}
+
+.TopicPointForm::-webkit-scrollbar-thumb {
+  width: 24px;
+  background: rgba(25, 25, 25, 0.2);
 }

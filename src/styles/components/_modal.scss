@@ -50,6 +50,7 @@
       font-size: 0.8rem;
       line-height: 2rem;
       opacity: 0.6;
+      cursor: pointer;
     }
   }
 }
@@ -63,4 +64,10 @@
   background: $bg-overlay;
   width: 100vw;
   height: 100vh;
+}
+
+@media only screen and (min-width: 768px) {
+  .Modal {
+    right: 10%; left: 10%;
+  }
 }

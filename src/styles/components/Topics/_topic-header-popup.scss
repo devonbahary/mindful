@@ -20,6 +20,7 @@
       grid-template-columns: 48px 1fr;
       height: 3rem;
       border-bottom: 1px solid gray;
+      cursor: pointer;
 
       .TopicHeaderPopup__menuItemIcon {
         position: relative;
@@ -46,5 +47,11 @@
     background: $bg-overlay;
     width: 100vw;
     height: 100vh;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .TopicHeaderPopup__menuItem:hover {
+    background: $bg-content-hover;
   }
 }
