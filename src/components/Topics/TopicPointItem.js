@@ -9,7 +9,7 @@ class TopicPointItem extends React.Component {
         {this.props.point.name && (
           <header className="TopicPointItem__header">{this.props.point.name}</header>
         )}
-        <div className="TopicPointItem__contents">
+        <div className="TopicPointItem__body">
           {this.props.point.type === 'note' ? (
             this.props.point.text
           ) : (

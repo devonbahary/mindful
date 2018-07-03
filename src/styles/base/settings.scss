@@ -6,7 +6,7 @@ $bg-overlay: rgba(50, 50, 50, 0.2);
 
 $buffer-sm: 6px;
 $buffer-lg: 12px;
-$buffer-xl: 24px;
+$buffer-xl: 32px;
 
 @mixin box-shadow-gray() {
   box-shadow: 0 0 5px gray;

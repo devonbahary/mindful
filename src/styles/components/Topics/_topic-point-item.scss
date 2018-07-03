@@ -4,7 +4,6 @@
   @include box-shadow-gray();
   border-radius: 2px;
   cursor: pointer;
-  align-self: stretch;
 
   .TopicPointItem__header {
     min-height: 1.5rem;
@@ -15,8 +14,7 @@
     @include box-shadow-gray();
   }
 
-  .TopicPointItem__contents {
-    display: grid;
+  .TopicPointItem__body {
     padding: $buffer-sm $buffer-lg;
     opacity: 0.8;
     white-space: pre-wrap;
@@ -43,6 +41,7 @@
 @media only screen and (min-width: 768px) {
   .TopicPointItem {
     min-height: 4rem;
+    margin: $buffer-lg $buffer-xl;
   }
 
   .TopicPointItem:hover {

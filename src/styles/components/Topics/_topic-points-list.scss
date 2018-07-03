@@ -4,13 +4,9 @@
 
 @media only screen and (min-width: 768px) {
   .TopicPointsList {
-    ul {
+    .TopicPointsList__list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-
-      li {
-        display: grid;
-      }
     }
   }
 }
