@@ -48,7 +48,7 @@ class DashboardHeader extends React.Component {
             />
           ) : (
             <div>
-              Mindfull
+              Noteable
               <div
                 className="DashboardHeader__searchButton"
                 onClick={this.handleToggleSearch}
