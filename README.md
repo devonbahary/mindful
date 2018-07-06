@@ -12,14 +12,14 @@ I'm a practitioner of **writing down findings related to my various topics of in
 
 Since I was already doing this with old-fashioned pen and paper, I figured why not **make an app to explore how to make this better**?
 
-### Create Topics
+## Create Topics
 ![Noteable Dashboard](/assets/img/DashboardMobile.png)
 
 **[Noteable](http://noteable1.herokuapp.com/)** starts with **Topics**.
 
 Got a new interest? Create a new **topic**.
 
-### Take Notes
+## Take Notes
 
 ![Noteable Topic](/assets/img/TopicMobile.png)
 
@@ -29,7 +29,7 @@ Scroll through the list of **notes** you've taken about the topic, or use the **
 
 ![Noteable Note](/assets/img/ListMobile.png)
 
-### Modeling After Successful Implementations
+## Modeling After Successful Implementations
 
 **Google** already has a successful implementation of **[Noteable's](http://noteable1.herokuapp.com/)** concept called **[Google Keep](https://keep.google.com/)**, which I admittedly use.
 
@@ -44,11 +44,11 @@ Developing **[Noteable](http://noteable1.herokuapp.com/)** has been a fun exerci
 It's even been inspiring in moments when I found myself lacking artistic creativity (don't tell anyone, but I'm much better at copying from something pretty than reliably coming up with something pretty on my own)!
 
 
-### Making It My Own
+## Making It My Own
 
-I've admitted to using **Google Keep**, but it functions best as a digital Post-it note collection rather than a means of **organizing disparate information**.
+I've admitted to using **Google Keep**, but it functions best as a digital Post-it note collection rather than as a means of **organizing disparate information**.
 
-If you want to organize your information in **Google Keep** such that all notes related to one another is in one accessible place, your best bet is to keep **ALL** of that information in **ONE** note and title it appropriately.
+If you want to organize your information in **Google Keep** such that all notes related to one another are in one accessible place, your best bet is to keep **ALL** of that information in **ONE** note and title it appropriately.
 
 Clearly this gets **long** and **unparseable**.
 
@@ -56,7 +56,7 @@ This inspired the idea of **topics** in **[Noteable](http://noteable1.herokuapp.
 
 This way **all my related information belongs in one topic**, but each note can serve as its own unit of information!
 
-### Where To Go From Here
+## Where To Go From Here
 
 My girlfriend's recently far surpassed me in her book-reading: she's reading a whopping one book every month. I totally encourage this habit, and I find myself **benefiting from it too** because I ask her on a regular basis what interesting things she's learned from her last readings.
 
