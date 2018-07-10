@@ -64,4 +64,10 @@ And so it came to me: **what if you could share your findings with others as you
 
 I think this could add a **social element** to **[Noteable](http://noteable1.herokuapp.com/)** for those who would be interested in opting in to it!
 - Give an interesting fact your friend just uploaded a **nod**, or even **write a message** in response to it!
-- Keep up to date with whatever your close circle is currently exploring and **learn together** in proximal collaboration!
+- Keep up to date with whatever your close circle is currently exploring and **learn together** by proximity!
+
+Stay tuned for improvements to **[Noteable](http://noteable1.herokuapp.com/)**!
+
+## (The Technical Stuff)
+
+This app was built from my own [React-Redux starter template](https://github.com/devonbahary/react-redux-starter-template).
