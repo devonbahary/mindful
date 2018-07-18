@@ -1,73 +1,148 @@
-# [Noteable](http://noteable1.herokuapp.com/)
+# MERN Template
 
-> A journaling app to document your varying pursuits of interest!
+## Features
+ * **M**ongoDB
+ * **E**xpress
+ * **R**eact/Redux
+ * **N**ode
 
-![Adding a Topic in Noteable](/assets/gif/AddTopicMobile.gif)
+### Front-End
+* [React-Redux starter template](https://github.com/devonbahary/react-redux-starter-template)
+  * Redux DevTools
+  * React Router
+  * SASS
+  * Normalize.css
+  * Babel plugins:
+    * [Class properties transform](https://babeljs.io/docs/en/babel-plugin-transform-class-properties/)
+    * [Object rest spread transform](https://babeljs.io/docs/en/babel-plugin-transform-object-rest-spread/)
+  * [Jest](https://jestjs.io/) testing
 
-## Many Interests, One Place to Track Them
+### Back-End
+  * Express
+    * Router ('/api')
+  * MongoDB (Mongoose)
+    * Databases configured for **development** + **testing**
+  * [Mocha](https://mochajs.org/) testing
 
-It's no secret I carry notebooks in my backpack. Each one has a piece of tape on the front with a sharpie label: *[48 Laws of Power](https://en.wikipedia.org/wiki/The_48_Laws_of_Power)*, *React*, *[Self-Reliance](https://en.wikipedia.org/wiki/Self-Reliance)*, *Node*, etc.
+## Get Started
+Start the **MongoDB** Server (Windows Command Prompt):
 
-I'm a practitioner of **writing down findings related to my various topics of interest**. I feel like they stick better in my memory that way, and instead of trying to recall something from a vague page number and parsing through all the dense information, I can just reach for the appropriate notebook and scan through an organized list of notable findings.
+```
+cd /Program Files/MongoDB/Server/3.6/bin
+mongod.exe --dbpath /Users/Devon/mongo-data
+```
 
-Since I was already doing this with old-fashioned pen and paper, I figured why not **make an app to explore how to make this better**?
+## Development
+> This template uses **[concurrently](https://www.npmjs.com/package/concurrently)** to run both the client server (port: **8080**) and back-end (port: **5000**) at the same time.
 
-## Create Topics
-![Noteable Dashboard](/assets/img/DashboardMobile.png)
+The client-side [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) is configured to proxy requests to **'/api'** to `localhost:5000`:
 
-**[Noteable](http://noteable1.herokuapp.com/)** starts with **Topics**.
+**/client/webpack.config.js**
+```javascript
+devServer: {
+  // ...,
+  proxy: {
+    '/api': "http://localhost:5000"
+  }
+}
 
-Got a new interest? Create a new **topic**.
+```
 
-## Take Notes
+This way, you can target the api from `localhost:8080/api/...`
 
-![Noteable Topic](/assets/img/TopicMobile.png)
+Start the development servers:
+```
+npm run dev
+```
 
-Scroll through the list of **notes** you've taken about the topic, or use the **search function** to narrow down what you're looking for.
+**package.json**
+```json
+"dev": "export NODE_ENV=dev || set \"NODE_ENV=dev\" && concurrently \"npm run server\" \"npm run client\"",
+"server": "export NODE_ENV=dev || set \"NODE_ENV=dev\" && nodemon server.js",
+"client": "npm run dev-server --prefix client"
+```
 
-**Notes** can be in the form of **text** or a **list**, with or without a title (for further organization).
+Now we have `nodemon` for automatic restarts in back-end code and `webpack-dev-server` with live-reload for the front-end.
 
-![Noteable Note](/assets/img/ListMobile.png)
+**/config/config.js**
+```javascript
+// ...
+else if (process.env.NODE_ENV === 'dev') {
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/sample-app';
+```
 
-## Modeling After Successful Implementations
+Our `process.env.NODE_ENV` has been set to `dev` via our script call, and this allows us to specify a development **MongoDB** database on `localhost:27017` under the name `sample-app`.
 
-**Google** already has a successful implementation of **[Noteable's](http://noteable1.herokuapp.com/)** concept called **[Google Keep](https://keep.google.com/)**, which I admittedly use.
-
-In fact, I've modeled **[Noteable](http://noteable1.herokuapp.com/)** after the UI design of **Google Keep**.
-
-![Comparison with Google Keep](/assets/img/SideBySide.png)
-
-Developing **[Noteable](http://noteable1.herokuapp.com/)** has been a fun exercise in taking a polished UI design and mocking it up from scratch.
-
-![Comparison with Google Keep](/assets/img/SideBySideNote.png)
-
-It's even been inspiring in moments when I found myself lacking artistic creativity (don't tell anyone, but I'm much better at copying from something pretty than reliably coming up with something pretty on my own)!
+Go to `localhost:8080` and batter up!
 
 
-## Making It My Own
+## Testing
+You have a few testing scripts available to you:
 
-I've admitted to using **Google Keep**, but it functions best as a digital Post-it note collection rather than as a means of **organizing disparate information**.
+**package.json**
+```json
+"test": "export NODE_ENV=test || set \"NODE_ENV=test\" && mocha tests/**/*.test.js --colors",
+"test-watch": "nodemon --exec npm test",
+"test-client": "npm test --prefix client",
+```
 
-If you want to organize your information in **Google Keep** such that all notes related to one another are in one accessible place, your best bet is to keep **ALL** of that information in **ONE** note and title it appropriately.
+- Run tests on the back-end API with `mocha` using `test` and `test-watch`
+- Run tests on the React client with `jest` using `test-client`
 
-Clearly this gets **long** and **unparseable**.
+By setting our `process.env.NODE_ENV` to `test`, we're able to specify a different testing **MongoDB** database, `sample-app-test`:
 
-This inspired the idea of **topics** in **[Noteable](http://noteable1.herokuapp.com/)**, and is where **[Noteable](http://noteable1.herokuapp.com/)** takes its departure from **Google Keep**: each **topic** serves as a sort-of fresh page of **Google Keep**, and each **note** then serves as its own instance of information.
+**/config/config.js**
+```javascript
+if (process.env.NODE_ENV === 'test') {
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/sample-app-test';
+}
+```
 
-This way **all my related information belongs in one topic**, but each note can serve as its own unit of information!
+We can seed this testing database and make manipulations to it through testing without affecting data we've been using for development.
 
-## Where To Go From Here
+## Production
 
-My girlfriend's recently far surpassed me in her book-reading: she's reading a whopping one book every month. I totally encourage this habit, and I find myself **benefiting from it too** because I ask her on a regular basis what interesting things she's learned from her last readings.
+**server.js**
+```javascript
+// use routes
+app.use('/api/samples', samples);
 
-And so it came to me: **what if you could share your findings with others as you came across them?**
+if (process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static('client/public/'));
 
-I think this could add a **social element** to **[Noteable](http://noteable1.herokuapp.com/)** for those who would be interested in opting in to it!
-- Give an interesting fact your friend just uploaded a **nod**, or even **write a message** in response to it!
-- Keep up to date with whatever your close circle is currently exploring and **learn together** by proximity!
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+  });
+}
+```
 
-Stay tuned for improvements to **[Noteable](http://noteable1.herokuapp.com/)**!
+Here in production, we've set up **Express** to serve up static assets from `/client/public` that get bundled in:
 
-## (The Technical Stuff)
+**package.json**
+```json
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run heroku-postbuild --prefix client"
+```
 
-This app was built from my own [React-Redux starter template](https://github.com/devonbahary/react-redux-starter-template).
+Because **Express** middleware functions are executed sequentially, any requests to `/api/samples` will use the routes specified in `/routes/api/samples`.
+
+All other requests will return the `/client/public/index.html` file running our React code.
+
+As for our **MongoDB** database, we have the following specifications for `MONGODB_URI`:
+```javascript
+if (process.env.NODE_ENV === 'test') {
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/sample-app-test';
+} else if (process.env.NODE_ENV === 'dev') {
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/sample-app';
+}
+
+// ELSE: add your MONGODB_URI here
+
+```
+
+In an else clause, set `process.env.MONGODB_URI` to your own database. I'm aware of a couple options:
+* [mLab](https://mlab.com/) database
+* Heroku assigns its own `process.env.MONGOB_URI` when [configured for MongoDB](https://devcenter.heroku.com/articles/mean-apps-restful-api#provision-a-mongodb-database).
+
+
+And that's it! Happy **MERN**ing!
