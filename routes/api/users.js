@@ -10,7 +10,7 @@ const router = express.Router();
 // @access  public
 router.get('/', (req, res) => {
   User.find()
-    .sort({ name: 1 }) // ascending order by name
+    .sort({ username: 1 }) // ascending order by username
     .then(users => res.json(users.map(user => user.toJSON())));
 });
 
