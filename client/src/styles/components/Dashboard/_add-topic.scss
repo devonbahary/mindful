@@ -1,9 +1,12 @@
 .AddTopic {
-  min-height: 4rem;
-  @include box-shadow-gray();
+  position: fixed;
+  top: 3rem; right: 0; left: 0;
+  height: 4rem;
+  box-shadow: 5px 0 15px gray;
   display: grid;
   grid-template-columns: 1fr 64px;
   margin-bottom: 1rem;
+  z-index: 1;
 
   .AddTopic__label {
     position: absolute;

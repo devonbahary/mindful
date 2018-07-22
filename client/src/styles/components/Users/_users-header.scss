@@ -1,5 +1,5 @@
-.DashboardHeader,
-.DashboardHeader--search {
+.UsersHeader,
+.UsersHeader--search {
   display: grid;
   grid-template-columns: 64px 1fr;
   position: fixed;
@@ -10,7 +10,7 @@
           transition: background-color 0.25s ease-out;
   z-index: 2;
 
-  .DashboardHeader__mainButton {
+  .UsersHeader__mainButton {
     position: relative;
 
     .icon {
@@ -20,16 +20,16 @@
   }
 }
 
-.DashboardHeader {
+.UsersHeader {
   background: $bg-theme;
 
-  .DashboardHeader__contents {
+  .UsersHeader__contents {
     position: relative;
     font-size: 1.2rem;
     letter-spacing: 2px;
     line-height: 3rem;
 
-    .DashboardHeader__searchButton {
+    .UsersHeader__searchButton {
       position: absolute;
       top: 0; bottom: 0; right: 0;
       width: 64px;
@@ -43,11 +43,11 @@
   }
 }
 
-.DashboardHeader--search {
+.UsersHeader--search {
   background: $bg-content;
   color: gray;
 
-  .DashboardHeader__mainButton {
+  .UsersHeader__mainButton {
     cursor: pointer;
   }
 

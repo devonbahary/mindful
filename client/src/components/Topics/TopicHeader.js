@@ -20,6 +20,9 @@ class TopicHeader extends React.Component {
   }
 
   handleToggleSearch = () => {
+    if (this.state.isPopupOpen) {
+      this.setState(() => ({ isPopupOpen: false }));
+    }
     this.setState((prevState) => ({
       isSearch: !prevState.isSearch
     }));

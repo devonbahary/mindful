@@ -28,6 +28,20 @@ describe('GET /api/users', () => {
   });
 });
 
+describe('GET /api/users/:username', () => {
+  it('should return a user for a requested username', done => {
+    request(app)
+      .get(`/api/users/${testUsers[0].username}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.username).toBe(testUsers[0].username);
+        expect(res.body._id).toBe(testUsers[0]._id.toString());
+        done();
+      });
+  });
+});
+
 describe('POST /api/users', () => {
   it('should create a new User', done => {
     const username = 'Lex Luthor';

@@ -14,6 +14,20 @@ router.get('/', (req, res) => {
     .then(users => res.json(users.map(user => user.toJSON())));
 });
 
+// @route   GET /api/users/:username
+// @desc    get all Users
+// @access  public
+router.get('/:username', (req, res) => {
+  User
+    .findOne({ username: req.params.username })
+    .then(user => {
+      if (!user) {
+        res.sendStatus(400);
+      }
+      res.json(user);
+    });
+});
+
 // @route   POST /api/users
 // @desc    create new User
 // @access  public
