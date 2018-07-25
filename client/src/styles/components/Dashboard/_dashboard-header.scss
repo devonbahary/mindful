@@ -5,10 +5,10 @@
   position: fixed;
   top: 0; right: 0; left: 0;
   height: 3rem;
-  @include box-shadow-gray-lg();
+  @include box-shadow-gray();
   -webkit-transition: background-color 0.25s ease-out;
           transition: background-color 0.25s ease-out;
-  z-index: 2;
+  z-index: 1;
 
   .DashboardHeader__mainButton {
     position: relative;
@@ -22,10 +22,11 @@
 
 .DashboardHeader {
   background: $bg-theme;
+  color: white;
 
   .DashboardHeader__contents {
     position: relative;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     letter-spacing: 2px;
     line-height: 3rem;
 

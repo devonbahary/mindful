@@ -25,10 +25,6 @@
   }
 }
 
-.TopicListItem:first-of-type {
-  margin-top: $buffer-sm;
-}
-
 @media only screen and (min-width: 768px) {
   .TopicListItem:hover {
     @include box-shadow-gray-lg();

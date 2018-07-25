@@ -1,8 +1,7 @@
 import React from 'react';
-import AddTopic from './AddTopic';
-import AppNav from '../AppNav';
-import DashboardHeader from './DashboardHeader';
 import TopicsList from './TopicsList';
+import AddTopic from './AddTopic';
+import DashboardHeader from './DashboardHeader';
 
 const Dashboard = () => (
     <main className="Dashboard">
@@ -11,7 +10,6 @@ const Dashboard = () => (
         <AddTopic />
         <TopicsList />
       </div>
-      <AppNav />
     </main>
 );
 

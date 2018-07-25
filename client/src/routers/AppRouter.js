@@ -4,9 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { fetchTopics } from '../actions/topics';
 import Dashboard from '../components/Dashboard/Dashboard';
 import Topic from '../components/Topics/Topic';
-import User from '../components/User/User';
-import Users from '../components/Users/Users';
-
 import NotFoundPage from '../components/NotFoundPage';
 
 class AppRouter extends React.Component {
@@ -21,8 +18,6 @@ class AppRouter extends React.Component {
           <Switch>
             <Route path='/' exact component={Dashboard} />
             <Route path='/topics/:id' component={Topic} />
-            <Route path='/users/:username' component={User} />
-            <Route path='/users' component={Users} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>
