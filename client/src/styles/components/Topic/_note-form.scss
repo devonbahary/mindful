@@ -1,4 +1,4 @@
-.TopicPointForm {
+.NoteForm {
   position: relative;
   padding: $buffer-lg;
   background: $bg-content;
@@ -6,12 +6,12 @@
   overflow-y: scroll;
 
   ul {
-    .TopicPointForm__bullet {
+    .NoteForm__bullet {
       display: grid;
       grid-template-columns: 24px 1fr;
       margin-bottom: $buffer-sm;
 
-      .TopicPointForm__bulletIcon {
+      .NoteForm__bulletIcon {
         position: relative;
 
         .icon {
@@ -40,12 +40,12 @@
   }
 }
 
-.TopicPointForm__footer {
+.NoteForm__footer {
   position: relative;
   height: 2.5rem;
   background: $bg-content;
 
-  .TopicPointForm__footerButton {
+  .NoteForm__footerButton {
     display: inline-block;
     position: relative;
     width: 48px;
@@ -59,7 +59,7 @@
     }
   }
 
-  .TopicPointForm__footerInfoBox {
+  .NoteForm__footerInfoBox {
     position: absolute;
     top: 0; right: $buffer-sm;
     opacity: 0.4;
@@ -68,11 +68,11 @@
   }
 }
 
-.TopicPointForm::-webkit-scrollbar {
+.NoteForm::-webkit-scrollbar {
   background: rgba(25, 25, 25, 0.1);
 }
 
-.TopicPointForm::-webkit-scrollbar-thumb {
+.NoteForm::-webkit-scrollbar-thumb {
   width: 24px;
   background: rgba(25, 25, 25, 0.2);
 }

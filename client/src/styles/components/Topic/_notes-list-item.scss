@@ -1,11 +1,11 @@
-.TopicPointItem {
+.NotesListItem {
   background: $bg-content;
   margin: $buffer-lg;
   @include box-shadow-gray();
   border-radius: 2px;
   cursor: pointer;
 
-  .TopicPointItem__header {
+  .NotesListItem__header {
     min-height: 1.5rem;
     background: $bg-background;
     letter-spacing: 1px;
@@ -14,18 +14,18 @@
     @include box-shadow-gray();
   }
 
-  .TopicPointItem__body {
+  .NotesListItem__body {
     padding: $buffer-sm $buffer-lg;
     opacity: 0.8;
     white-space: pre-wrap;
 
-    .TopicPointItem__list {
-      .TopicPointItem__listItem {
+    .NotesListItem__list {
+      .NotesListItem__listItem {
         display: grid;
         grid-template-columns: 24px 1fr;
         margin-bottom: $buffer-sm;
 
-        .TopicPointItem__listItemBullet {
+        .NotesListItem__listItemBullet {
           position: relative;
 
           .icon {
@@ -39,12 +39,12 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .TopicPointItem {
+  .NotesListItem {
     min-height: 4rem;
     margin: $buffer-lg $buffer-xl;
   }
 
-  .TopicPointItem:hover {
+  .NotesListItem:hover {
     @include box-shadow-gray-lg();
   }
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectPoints from '../../selectors/points';
-import TopicPointItem from './TopicPointItem';
+import NotesListItem from './NotesListItem';
 
-const TopicPointsList = ({ topic, points, openTopicPointModal }) => (
-  <div className="TopicPointsList">
+const NotesList = ({ topic, points, openNoteModal }) => (
+  <div className="NotesList">
     {topic && points.length > 0 && (
-      <ul className="TopicPointsList__list">
+      <ul className="NotesList__list">
         {points.map(point => (
           <li key={point.id}>
-            <TopicPointItem topic={topic} point={point} openTopicPointModal={openTopicPointModal} />
+            <NotesListItem topic={topic} point={point} openNoteModal={openNoteModal} />
           </li>
         ))}
       </ul>
@@ -21,4 +21,4 @@ const mapStateToProps = (state, ownProps) => ({
   points: ownProps.topic ? selectPoints(ownProps.topic.points, state.filters.points) : []
 });
 
-export default connect(mapStateToProps)(TopicPointsList);
+export default connect(mapStateToProps)(NotesList);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { fetchTopics } from '../actions/topics';
 import Dashboard from '../components/Dashboard/Dashboard';
-import Topic from '../components/Topics/Topic';
+import Topic from '../components/Topic/Topic';
 import NotFoundPage from '../components/NotFoundPage';
 
 class AppRouter extends React.Component {

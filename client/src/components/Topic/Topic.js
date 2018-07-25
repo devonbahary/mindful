@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import TopicPointsList from './TopicPointsList';
+import NotesList from './NotesList';
 import TopicHeader from './TopicHeader';
 import TopicFooter from './TopicFooter';
 import TopicEditModal from './TopicEditModal';
-import TopicPointModal from './TopicPointModal';
+import NoteModal from './NoteModal';
 import NotFoundPage from '../NotFoundPage';
 
 
 class Topic extends React.Component {
   state = {
     isTopicEditModalOpen: false,
-    isTopicPointModalOpen: false,
+    isNoteModalOpen: false,
     topicPointModalPoint: undefined,
     topicPointModalType: 'note'
   };
@@ -19,13 +19,13 @@ class Topic extends React.Component {
   handleOpenTopicEditModal = () => this.setState(() => ({ isTopicEditModalOpen: true }));
   handleCloseTopicEditModal = () => this.setState(() => ({ isTopicEditModalOpen: false }));
 
-  handleOpenTopicPointModal = (e, point, { type } = {}) => this.setState(() => ({
-    isTopicPointModalOpen: true,
+  handleOpenNoteModal = (e, point, { type } = {}) => this.setState(() => ({
+    isNoteModalOpen: true,
     topicPointModalPoint: point,
     topicPointModalType: type
   }));
-  handleCloseTopicPointModal = () => this.setState(() => ({
-    isTopicPointModalOpen: false,
+  handleCloseNoteModal = () => this.setState(() => ({
+    isNoteModalOpen: false,
     topicPointModalPoint: undefined,
     topicPointModalType: 'note',
     point: undefined
@@ -36,19 +36,19 @@ class Topic extends React.Component {
       return (
         <div className="Topic">
           <TopicHeader topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} />
-          <TopicPointsList topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
-          <TopicFooter topic={this.props.topic} openTopicPointModal={this.handleOpenTopicPointModal} />
+          <NotesList topic={this.props.topic} openNoteModal={this.handleOpenNoteModal} />
+          <TopicFooter topic={this.props.topic} openNoteModal={this.handleOpenNoteModal} />
           <TopicEditModal
             topic={this.props.topic}
             isModalOpen={this.state.isTopicEditModalOpen}
             onRequestClose={this.handleCloseTopicEditModal}
           />
-          <TopicPointModal
+          <NoteModal
             topic={this.props.topic}
             point={this.state.topicPointModalPoint}
             pointType={this.state.topicPointModalType}
-            isModalOpen={this.state.isTopicPointModalOpen}
-            onRequestClose={this.handleCloseTopicPointModal}
+            isModalOpen={this.state.isNoteModalOpen}
+            onRequestClose={this.handleCloseNoteModal}
           />
           <div className="Topic__bgIcon ion-md-bulb" />
         </div>

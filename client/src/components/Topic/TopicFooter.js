@@ -1,10 +1,10 @@
 import React from 'react';
-import TopicPointModal from './TopicPointModal';
+import NoteModal from './NoteModal';
 
 class TopicFooter extends React.Component {
-  handleOpenNote = () => this.props.openTopicPointModal(undefined, undefined, { type: 'note' });
+  handleOpenNote = () => this.props.openNoteModal(undefined, undefined, { type: 'note' });
 
-  handleOpenList = () => this.props.openTopicPointModal(undefined, undefined, { type: 'list' });
+  handleOpenList = () => this.props.openNoteModal(undefined, undefined, { type: 'list' });
 
   render() {
     return (

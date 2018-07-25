@@ -7,13 +7,13 @@ import Modal from '../Modal';
 import _ from 'lodash';
 import moment from 'moment';
 
-class TopicPointModal extends React.Component {
+class NoteModal extends React.Component {
   state = {
     name: this.props.point ? this.props.point.name : '',
     type: this.props.point ? this.props.point.type : this.props.pointType,
     text: this.props.point ? this.props.point.text : '',
     bullets: this.props.point ? this.props.point.bullets : [],
-    isDeleteTopicPointModalOpen: false
+    isDeleteNoteModalOpen: false
   };
 
   handleNameChange = (e) => {
@@ -76,18 +76,18 @@ class TopicPointModal extends React.Component {
     this.handleRequestClose();
   };
 
-  openDeleteTopicPointModal = () => this.setState(() => ({ isDeleteTopicPointModalOpen: true }));
+  openDeleteNoteModal = () => this.setState(() => ({ isDeleteNoteModalOpen: true }));
 
-  handleRequestCloseDeleteTopicPointModal = () => this.setState(() => ({ isDeleteTopicPointModalOpen: false }));
+  handleRequestCloseDeleteNoteModal = () => this.setState(() => ({ isDeleteNoteModalOpen: false }));
 
-  handleConfirmDeleteTopicPointModal = () => {
+  handleConfirmDeleteNoteModal = () => {
     this.props.removeTopicPoint();
     this.props.onRequestClose();
     this.setState(() => ({
       name: '',
       text: '',
       bullets: [],
-      isDeleteTopicPointModalOpen: false
+      isDeleteNoteModalOpen: false
     }));
   };
 
@@ -126,7 +126,7 @@ class TopicPointModal extends React.Component {
         headerPlaceholder={this.state.type}
         headerIcon="ion-md-bulb"
       >
-        <form className="TopicPointForm" onSubmit={this.handleSubmit}>
+        <form className="NoteForm" onSubmit={this.handleSubmit}>
           {this.state.type === 'note' && (
             <Textarea
               placeholder="Lorem Ipsum.."
@@ -139,8 +139,8 @@ class TopicPointModal extends React.Component {
           {this.state.type === 'list' && (
             <ul>
               {this.state.bullets.map((bullet, index) => (
-                <li key={index} className="TopicPointForm__bullet">
-                  <div className="TopicPointForm__bulletIcon">
+                <li key={index} className="NoteForm__bullet">
+                  <div className="NoteForm__bulletIcon">
                     <div className="icon ion-md-square" />
                   </div>
                   <Textarea
@@ -153,8 +153,8 @@ class TopicPointModal extends React.Component {
                   />
                 </li>
               ))}
-              <li className="TopicPointForm__bullet">
-                <div className="TopicPointForm__bulletIcon">
+              <li className="NoteForm__bullet">
+                <div className="NoteForm__bulletIcon">
                   <div className="icon ion-md-square" />
                 </div>
                 <Textarea
@@ -168,19 +168,19 @@ class TopicPointModal extends React.Component {
           )}
         </form>
         {this.props.point && (
-          <footer className="TopicPointForm__footer">
-            <div className="TopicPointForm__footerButton" onClick={this.openDeleteTopicPointModal}>
+          <footer className="NoteForm__footer">
+            <div className="NoteForm__footerButton" onClick={this.openDeleteNoteModal}>
               <div className="icon ion-md-trash" />
             </div>
-            <div className="TopicPointForm__footerInfoBox">
+            <div className="NoteForm__footerInfoBox">
               Edited {moment(this.props.point.lastUpdated).fromNow()}
             </div>
           </footer>
         )}
         <ConfirmModal
-          isOpen={this.state.isDeleteTopicPointModalOpen}
-          onRequestClose={this.handleRequestCloseDeleteTopicPointModal}
-          onConfirm={this.handleConfirmDeleteTopicPointModal}
+          isOpen={this.state.isDeleteNoteModalOpen}
+          onRequestClose={this.handleRequestCloseDeleteNoteModal}
+          onConfirm={this.handleConfirmDeleteNoteModal}
           prompt="Delete this note?"
         />
       </Modal>
@@ -194,4 +194,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   removeTopicPoint: () => dispatch(removeTopicPoint(ownProps.topic.id, ownProps.point))
 });
 
-export default connect(undefined, mapDispatchToProps)(TopicPointModal);
+export default connect(undefined, mapDispatchToProps)(NoteModal);

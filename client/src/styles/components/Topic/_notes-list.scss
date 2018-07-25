@@ -1,10 +1,10 @@
-.TopicPointsList {
+.NotesList {
   padding-bottom: 3rem;
 }
 
 @media only screen and (min-width: 768px) {
-  .TopicPointsList {
-    .TopicPointsList__list {
+  .NotesList {
+    .NotesList__list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
