@@ -10,23 +10,23 @@
           transition: background-color 0.25s ease-out;
   z-index: 1;
 
-  .DashboardHeader__mainButton {
+  .DashboardHeader__appIcon {
     position: relative;
 
     .icon {
       @include center();
       font-size: 32px;
+      opacity: 0.6;
     }
   }
 }
 
 .DashboardHeader {
   background: $bg-theme;
-  color: white;
 
   .DashboardHeader__contents {
     position: relative;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     letter-spacing: 2px;
     line-height: 3rem;
 

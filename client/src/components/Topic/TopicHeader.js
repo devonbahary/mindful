@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { setPointsFilter } from '../../actions/filters';
+import SearchHeader from '../SearchHeader';
 import TopicHeaderPopup from './TopicHeaderPopup';
 
 class TopicHeader extends React.Component {
@@ -10,7 +11,7 @@ class TopicHeader extends React.Component {
     isSearch: false
   };
 
-  handleMainButtonClick = () => {
+  handleBackButton = () => {
     if (this.state.isSearch) {
       this.setState(() => ({ isSearch: false }));
       this.props.setPointsFilter('');
@@ -19,10 +20,8 @@ class TopicHeader extends React.Component {
     }
   }
 
-  handleToggleSearch = () => {
-    this.setState((prevState) => ({
-      isSearch: !prevState.isSearch
-    }));
+  handleOpenSearch = () => {
+    this.setState(() => ({ isSearch: true }));
     this.props.setPointsFilter('');
   };
 
@@ -38,27 +37,32 @@ class TopicHeader extends React.Component {
     this.props.openTopicEditModal();
   };
 
-  render() {
-    return (
-      <header className={this.state.isSearch ? "TopicHeader--search" : "TopicHeader"}>
-        <div className="TopicHeader__mainButton" onClick={this.handleMainButtonClick} >
-          <div className="icon ion-md-arrow-round-back" />
-        </div>
+  handleBlur = () => {
+    this.setState(() => ({ isSearch: false }));
+    this.props.setPointsFilter('');
+  }
 
-        {this.state.isSearch ? (
-          <input
-            type="text"
-            value={this.props.pointsFilter}
-            onChange={this.handlePointsFilterTextChange}
-            placeholder="search notes"
-            autoFocus
-          />
-        ) : (
+  render() {
+    if (this.state.isSearch) {
+      return (
+        <SearchHeader
+          searchValue={this.props.pointsFilter}
+          onSearchChange={this.handlePointsFilterTextChange}
+          onBlur={this.handleBlur}
+          placeholder="search notes"
+        />
+      );
+    } else {
+      return (
+        <header className="TopicHeader">
+          <div className="TopicHeader__backButton" onClick={this.handleBackButton} >
+            <div className="icon ion-md-arrow-round-back" />
+          </div>
           <div className="TopicHeader__contents">
             {this.props.topic && this.props.topic.name}
             <div
               className="TopicHeader__searchButton"
-              onClick={this.handleToggleSearch}
+              onClick={this.handleOpenSearch}
             >
               <div className="icon ion-md-search" />
             </div>
@@ -69,11 +73,11 @@ class TopicHeader extends React.Component {
               <div className="icon ion-md-more" />
             </div>
           </div>
-        )}
-        {this.state.isPopupOpen && <TopicHeaderPopup topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} onClose={this.togglePopup} />}
-      </header>
-    );
-  }
+          {this.state.isPopupOpen && <TopicHeaderPopup topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} onClose={this.togglePopup} />}
+        </header>
+      );
+    }
+  };
 }
 
 const mapStateToProps = (state) => ({

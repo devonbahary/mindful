@@ -10,13 +10,14 @@
           transition: background-color 0.25s ease-out;
   z-index: 1;
 
-  .TopicHeader__mainButton {
+  .TopicHeader__backButton {
     position: relative;
     cursor: pointer;
 
     .icon {
       @include center();
       font-size: 32px;
+      opacity: 0.6;
     }
   }
 

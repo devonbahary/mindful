@@ -1,0 +1,47 @@
+.SearchHeader {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  background: $bg-content;
+  height: 3rem;
+  color: gray;
+  @include box-shadow-gray();
+  -webkit-transition: background-color 0.25s ease-out;
+          transition: background-color 0.25s ease-out;
+  z-index: 1;
+  animation: appear 0.5s ease-out;
+
+  .SearchHeader__backButton {
+    position: relative;
+    cursor: pointer;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+    }
+  }
+
+  .SearchHeader__searchBox {
+    input {
+      width: 100%;
+      height: 100%;
+      background: none;
+      border: none;
+      padding: 0 $buffer-sm;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

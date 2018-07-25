@@ -1,22 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTopicsFilter } from '../../actions/filters';
+import SearchHeader from '../SearchHeader';
 
 class DashboardHeader extends React.Component {
   state = {
     isSearch: false
   };
 
-  handleMainButtonClick = () => {
-    if (this.state.isSearch) {
-      this.setState(() => ({ isSearch: false }));
-    }
-  }
-
-  handleToggleSearch = () => {
-    this.setState((prevState) => ({
-      isSearch: !prevState.isSearch
-    }));
+  handleOpenSearch = () => {
+    this.setState(() => ({ isSearch: true }));
     this.props.setTopicsFilter('');
   };
 
@@ -31,37 +24,35 @@ class DashboardHeader extends React.Component {
   };
 
   render() {
-    return (
-      <header className={this.state.isSearch ? "DashboardHeader--search" : "DashboardHeader"}>
-        <div className="DashboardHeader__mainButton" onClick={this.handleMainButtonClick}>
-          <div className={`icon ${this.state.isSearch ? 'ion-md-arrow-round-back' : 'ion-md-bulb'}`} />
-        </div>
-        <div className="DashboardHeader__contents">
-          {this.state.isSearch ? (
-            <input
-              type="text"
-              value={this.props.topicsFilter}
-              onChange={this.handleTopicsFilterTextChange}
-              onBlur={this.handleBlur}
-              placeholder="search topics"
-              autoFocus
-            />
-          ) : (
-            <div>
-              Noteable
-              <div
-                className="DashboardHeader__searchButton"
-                onClick={this.handleToggleSearch}
-              >
-                <div className="icon ion-md-search" />
-              </div>
+    if (this.state.isSearch) {
+      return (
+        <SearchHeader
+          searchValue={this.props.topicFilter}
+          onSearchChange={this.handleTopicsFilterTextChange}
+          onBlur={this.handleBlur}
+          placeholder="search topics"
+        />
+      );
+    } else {
+      return (
+        <header className="DashboardHeader">
+          <div className="DashboardHeader__appIcon">
+            <div className="icon ion-md-bulb" />
+          </div>
+          <div className="DashboardHeader__contents">
+            Noteable
+            <div
+              className="DashboardHeader__searchButton"
+              onClick={this.handleOpenSearch}
+            >
+              <div className="icon ion-md-search" />
             </div>
-          )}
-        </div>
-      </header>
-    );
-  }
-}
+          </div>
+        </header>
+      );
+    }
+  };
+};
 
 const mapStateToProps = (state) => ({
   topicsFilter: state.topicsFilter
