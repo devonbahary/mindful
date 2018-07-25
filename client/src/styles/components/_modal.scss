@@ -64,6 +64,7 @@
   background: $bg-overlay;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
 }
 
 @media only screen and (min-width: 768px) {

@@ -50,7 +50,6 @@ class TopicHeader extends React.Component {
             type="text"
             value={this.props.pointsFilter}
             onChange={this.handlePointsFilterTextChange}
-            onBlur={this.handleBlur}
             placeholder="search notes"
             autoFocus
           />
