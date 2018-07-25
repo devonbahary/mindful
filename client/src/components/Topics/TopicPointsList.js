@@ -18,7 +18,7 @@ const TopicPointsList = ({ topic, points, openTopicPointModal }) => (
 );
 
 const mapStateToProps = (state, ownProps) => ({
-  points: ownProps.topic ? selectPoints(ownProps.topic.points, state.pointsFilter) : []
+  points: ownProps.topic ? selectPoints(ownProps.topic.points, state.filters.points) : []
 });
 
 export default connect(mapStateToProps)(TopicPointsList);

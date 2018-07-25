@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTopicsFilter } from '../../actions/topicsFilter';
+import { setTopicsFilter } from '../../actions/filters';
 
 class DashboardHeader extends React.Component {
   state = {

@@ -16,7 +16,7 @@ const TopicsList = ({ topics }) => (
 );
 
 const mapStateToProps = (state ) => ({
-  topics: selectTopics(state.topics, state.topicsFilter)
+  topics: selectTopics(state.topics, state.filters.topics)
 });
 
 export default connect(mapStateToProps)(TopicsList);

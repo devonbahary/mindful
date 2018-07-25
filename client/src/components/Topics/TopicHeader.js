@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { setPointsFilter } from '../../actions/pointsFilter';
+import { setPointsFilter } from '../../actions/filters';
 import TopicHeaderPopup from './TopicHeaderPopup';
 
 class TopicHeader extends React.Component {
