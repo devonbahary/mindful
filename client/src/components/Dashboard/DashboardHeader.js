@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTopicsFilter } from '../../actions/filters';
+import Header from '../Header';
 import SearchHeader from '../SearchHeader';
 
 class DashboardHeader extends React.Component {
@@ -35,20 +36,17 @@ class DashboardHeader extends React.Component {
       );
     } else {
       return (
-        <header className="DashboardHeader">
-          <div className="DashboardHeader__appIcon">
-            <div className="icon ion-md-bulb" />
+        <Header
+          mainButtonIcon="ion-md-bulb"
+          headerText="Noteable"
+        >
+          <div
+            className="Header__button"
+            onClick={this.handleOpenSearch}
+          >
+            <div className="icon ion-md-search" />
           </div>
-          <div className="DashboardHeader__contents">
-            Noteable
-            <div
-              className="DashboardHeader__searchButton"
-              onClick={this.handleOpenSearch}
-            >
-              <div className="icon ion-md-search" />
-            </div>
-          </div>
-        </header>
+        </Header>
       );
     }
   };

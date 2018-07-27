@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { setPointsFilter } from '../../actions/filters';
+import Header from '../Header';
 import SearchHeader from '../SearchHeader';
 import TopicHeaderPopup from './TopicHeaderPopup';
 
@@ -11,7 +12,8 @@ class TopicHeader extends React.Component {
     isSearch: false
   };
 
-  handleBackButton = () => {
+  handleMainButton = () => {
+    console.log('handleMainButtons')
     if (this.state.isSearch) {
       this.setState(() => ({ isSearch: false }));
       this.props.setPointsFilter('');
@@ -54,27 +56,31 @@ class TopicHeader extends React.Component {
       );
     } else {
       return (
-        <header className="TopicHeader">
-          <div className="TopicHeader__backButton" onClick={this.handleBackButton} >
-            <div className="icon ion-md-arrow-round-back" />
+        <Header
+          mainButtonIcon="ion-md-arrow-round-back"
+          onMainButton={this.handleMainButton}
+          headerText={this.props.topic && this.props.topic.name}
+        >
+          <div
+            className={this.state.isPopupOpen ? "Header__button--active" : "Header__button"}
+            onClick={this.togglePopup}
+          >
+            <div className="icon ion-md-more" />
           </div>
-          <div className="TopicHeader__contents">
-            {this.props.topic && this.props.topic.name}
-            <div
-              className="TopicHeader__searchButton"
-              onClick={this.handleOpenSearch}
-            >
-              <div className="icon ion-md-search" />
-            </div>
-            <div
-              className={this.state.isPopupOpen ? "TopicHeader__popupButton--active" : "TopicHeader__popupButton"}
-              onClick={this.togglePopup}
-            >
-              <div className="icon ion-md-more" />
-            </div>
+          <div
+            className="Header__button"
+            onClick={this.handleOpenSearch}
+          >
+            <div className="icon ion-md-search" />
           </div>
-          {this.state.isPopupOpen && <TopicHeaderPopup topic={this.props.topic} openTopicEditModal={this.handleOpenTopicEditModal} onClose={this.togglePopup} />}
-        </header>
+          {this.state.isPopupOpen && (
+            <TopicHeaderPopup
+              topic={this.props.topic}
+              openTopicEditModal={this.handleOpenTopicEditModal}
+              onClose={this.togglePopup}
+            />
+          )}
+        </Header>
       );
     }
   };
