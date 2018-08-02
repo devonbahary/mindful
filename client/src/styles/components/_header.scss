@@ -5,10 +5,10 @@
   position: fixed;
   top: 0; right: 0; left: 0;
   height: 3rem;
-  @include box-shadow-gray();
+  @include box-shadow-gray-lg();
   -webkit-transition: background-color 0.25s ease-out;
           transition: background-color 0.25s ease-out;
-  z-index: 1;
+  z-index: 2;
 
   .Header__mainButton {
     position: relative;
@@ -16,7 +16,7 @@
     .icon {
       @include center();
       font-size: 32px;
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
 
@@ -31,7 +31,8 @@
       top: 0; right: 0; bottom: 0; left: 0;
 
       .Header__button,
-      .Header__button--active {
+      .Header__button--active,
+      .Header__button--disabled {
         position: relative;
         float: right;
         width: 3rem;
@@ -49,6 +50,14 @@
 
         .icon {
           color: white;
+        }
+      }
+
+      .Header__button--disabled {
+        opacity: 0.6;
+
+        .icon {
+          color: gray;
         }
       }
     }

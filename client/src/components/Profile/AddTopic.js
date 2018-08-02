@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTopic } from '../../actions/topics';
+import { addTopic } from '../../actions/user';
 
 class AddTopic extends React.Component {
   state = {
     isOpen: false,
-    text: ''
+    text: '',
+    isDisabled: false
   };
 
   componentDidMount() {
@@ -18,13 +19,17 @@ class AddTopic extends React.Component {
 
   handleTextChange = (e) => {
     const text = e.target.value;
-    this.setState(() => ({ text }));
+    const alreadyHas = this.props.topics.some(topic => topic.title === text);
+    this.setState(() => ({
+      text,
+      isDisabled: alreadyHas
+    }));
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addTopic({ name: this.state.text });
-    this.setState(() => ({ text: '' }));
+    this.props.addTopic({ title: this.state.text });
+    this.setState(() => ({ text: '', isDisabled: false }));
     this.inputNode.blur();
   };
 
@@ -35,7 +40,11 @@ class AddTopic extends React.Component {
   handleBlur = () => {
     setTimeout(() => {
       if (this.mounted) {
-        this.setState(() => ({ isOpen: false, text: '' }));
+        this.setState(() => ({
+          isOpen: false,
+          text: '',
+          isDisabled: false
+        }));
       }
     }, 0);
   };
@@ -66,6 +75,7 @@ class AddTopic extends React.Component {
         <button
           type="submit"
           className="AddTopic__button"
+          disabled={this.state.isDisabled}
         >
           <div className="icon ion-md-add"></div>
         </button>
@@ -74,8 +84,8 @@ class AddTopic extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addTopic: (topic) => dispatch(addTopic(topic))
+const mapStateToProps = state => ({
+  topics: state.user.user.topics
 });
 
-export default connect(undefined, mapDispatchToProps)(AddTopic);
+export default connect(mapStateToProps, { addTopic })(AddTopic);

@@ -1,6 +1,7 @@
 const initialState = {
   topics: '',
-  points: ''
+  notes: '',
+  users: ''
 };
 
 export default (prevState = initialState, action) => {
@@ -10,10 +11,15 @@ export default (prevState = initialState, action) => {
         ...prevState,
         topics: action.text
       };
-    case 'SET_POINTS_FILTER':
+    case 'SET_USERS_FILTER':
       return {
         ...prevState,
-        points: action.text
+        users: action.text
+      };
+    case 'SET_NOTES_FILTER':
+      return {
+        ...prevState,
+        notes: action.text
       };
     default:
       return prevState;

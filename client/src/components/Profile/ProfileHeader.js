@@ -1,10 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { setTopicsFilter } from '../../actions/filters';
 import Header from '../Header';
 import SearchHeader from '../SearchHeader';
 
-class DashboardHeader extends React.Component {
+class ProfileHeader extends React.Component {
   state = {
     isSearch: false
   };
@@ -35,10 +36,12 @@ class DashboardHeader extends React.Component {
         />
       );
     } else {
+      const isMe = !this.props.match.params.username;
       return (
         <Header
-          mainButtonIcon="ion-md-bulb"
-          headerText="Noteable"
+          mainButtonIcon={isMe ? (this.props.username ? "ion-md-person" : "ion-md-bulb") : "ion-md-arrow-round-back"}
+          onMainButton={isMe ? () => {} : () => this.props.history.push('/users')}
+          headerText={this.props.username ? this.props.username : 'Noteable'}
         >
           <div
             className="Header__button"
@@ -52,12 +55,16 @@ class DashboardHeader extends React.Component {
   };
 };
 
-const mapStateToProps = (state) => ({
-  topicsFilter: state.topicsFilter
-});
+const mapStateToProps = (state, ownProps) => {
+  const username = ownProps.match.params.username;
+  return {
+    topicsFilter: state.topicsFilter,
+    username: username ? username : state.user.user.username
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   setTopicsFilter: (text) => dispatch(setTopicsFilter(text))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileHeader));

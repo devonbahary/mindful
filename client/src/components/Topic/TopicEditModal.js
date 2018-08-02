@@ -1,36 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editTopic } from '../../actions/topics';
+import { editTopic } from '../../actions/user';
 import Modal from '../Modal';
 
 class TopicEditModal extends React.Component {
   state = {
-    name: this.props.topic ? this.props.topic.name : ''
+    title: this.props.topic ? this.props.topic.title : ''
   };
 
-  handleNameChange = (e) => {
-    const name = e.target.value;
-    this.setState(() => ({ name }));
+  handleTitleChange = e => {
+    const title = e.target.value;
+    this.setState(() => ({ title }));
   };
 
-  handleFocus = (e) => {
+  handleFocus = e => {
     const tempValue = e.target.value;
     e.target.value = '';
     e.target.value = tempValue;
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.handleRequestClose();
   };
 
   handleRequestClose = () => {
-    if (this.state.name) {
-      this.props.editTopic(this.state);
+    if (this.state.title) {
+      this.props.editTopic(this.props.topic._id, this.state);
     } else {
-      this.setState(() => ({ name: this.props.topic.name }));
+      this.setState(() => ({ title: this.props.topic.title }));
     }
-    this.props.onRequestClose();
+    this.props.onRequestClose(this.state.title);
   };
 
   render() {
@@ -38,15 +38,15 @@ class TopicEditModal extends React.Component {
       <Modal
         isOpen={this.props.isModalOpen}
         onRequestClose={this.handleRequestClose}
-        headerText={this.props.topic && this.props.topic.name}
+        headerText={this.props.topic && this.props.topic.title}
         headerIcon="ion-md-create"
       >
         <form className="TopicEditForm" onSubmit={this.handleSubmit}>
           <input
             type="text"
-            value={this.state.name}
-            onChange={this.handleNameChange}
-            placeholder={this.props.topic && this.props.topic.name}
+            value={this.state.title}
+            onChange={this.handleTitleChange}
+            placeholder={this.props.topic && this.props.topic.title}
             onFocus={this.handleFocus}
             autoFocus
           />
@@ -56,8 +56,4 @@ class TopicEditModal extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  editTopic: (updates) => dispatch(editTopic(ownProps.topic.id, updates))
-});
-
-export default connect(undefined, mapDispatchToProps)(TopicEditModal);
+export default connect(undefined, { editTopic })(TopicEditModal);

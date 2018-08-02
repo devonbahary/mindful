@@ -40,7 +40,7 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       publicPath: '/dist/',
       proxy: {
-        '/api': 'localhost:5000'
+        '/api': 'http://localhost:5000'
       }
     }
   };

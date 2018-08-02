@@ -9,7 +9,7 @@
   @include box-shadow-gray();
   -webkit-transition: background-color 0.25s ease-out;
           transition: background-color 0.25s ease-out;
-  z-index: 1;
+  z-index: 2;
   animation: appear 0.5s ease-out;
 
   .SearchHeader__backButton {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { removeTopic } from '../../actions/topics';
+import { removeTopic } from '../../actions/user';
 import ConfirmModal from './ConfirmModal';
 
 class TopicHeaderPopup extends React.Component {
@@ -12,7 +12,7 @@ class TopicHeaderPopup extends React.Component {
   openDeleteTopicModal = () => this.setState(() => ({ isDeleteTopicModalOpen: true }));
 
   handleConfirmDeleteTopicModal = () => {
-    this.props.removeTopic(this.props.topic);
+    this.props.removeTopic(this.props.topic._id);
     this.props.history.goBack();
   };
 

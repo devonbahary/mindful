@@ -1,27 +1,28 @@
+import _ from 'lodash';
+import moment from 'moment';
 import React from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { addTopicPoint, editTopicPoint, removeTopicPoint } from '../../actions/topics';
+import { addNote, editNote, removeNote } from '../../actions/notes';
 import Textarea from 'react-textarea-autosize';
 import ConfirmModal from './ConfirmModal';
 import Modal from '../Modal';
-import _ from 'lodash';
-import moment from 'moment';
 
 class NoteModal extends React.Component {
   state = {
-    name: this.props.point ? this.props.point.name : '',
-    type: this.props.point ? this.props.point.type : this.props.pointType,
-    text: this.props.point ? this.props.point.text : '',
-    bullets: this.props.point ? this.props.point.bullets : [],
+    title: this.props.note ? this.props.note.title : '',
+    noteType: this.props.note ? this.props.note.noteType : this.props.noteType,
+    text: this.props.note ? this.props.note.text : '',
+    bullets: this.props.note ? this.props.note.bullets : [],
     isDeleteNoteModalOpen: false
   };
 
-  handleNameChange = (e) => {
-    const name = e.target.value;
-    this.setState(() => ({ name }));
+  handleTitleChange = e => {
+    const title = e.target.value;
+    this.setState(() => ({ title }));
   };
 
-  handleTextChange = (e) => {
+  handleTextChange = e => {
     const text = e.target.value;
     this.setState(() => ({ text }));
   };
@@ -34,21 +35,21 @@ class NoteModal extends React.Component {
   };
 
   handleAfterOpen = () => {
-    if (this.props.point) {
+    if (this.props.note) {
       this.setState(() => ({
-        name: this.props.point.name,
-        type: this.props.point.type,
-        text: this.props.point.text,
-        bullets: this.props.point.bullets
+        title: this.props.note.title,
+        noteType: this.props.note.noteType,
+        text: this.props.note.text,
+        bullets: this.props.note.bullets
       }));
     } else {
       this.setState(() => ({
-        type: this.props.pointType
+        noteType: this.props.noteType
       }));
     }
   };
 
-  handleAddBullet = (e) => {
+  handleAddBullet = e => {
     const text = e.target.value;
     this.setState((prevState) => ({
       bullets: prevState.bullets.concat(text)
@@ -65,13 +66,13 @@ class NoteModal extends React.Component {
     }
   };
 
-  handleFocus = (e) => {
+  handleFocus = e => {
     const tempValue = e.target.value;
     e.target.value = '';
     e.target.value = tempValue;
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.handleRequestClose();
   };
@@ -81,10 +82,10 @@ class NoteModal extends React.Component {
   handleRequestCloseDeleteNoteModal = () => this.setState(() => ({ isDeleteNoteModalOpen: false }));
 
   handleConfirmDeleteNoteModal = () => {
-    this.props.removeTopicPoint();
+    this.props.removeNote(this.props.note._id);
     this.props.onRequestClose();
     this.setState(() => ({
-      name: '',
+      title: '',
       text: '',
       bullets: [],
       isDeleteNoteModalOpen: false
@@ -92,26 +93,26 @@ class NoteModal extends React.Component {
   };
 
   handleRequestClose = () => {
-    const point = {
-      name: this.state.name,
-      type: this.state.type,
-      text: this.state.type === 'note' ? this.state.text : undefined,
-      bullets: this.state.type === 'list' ? this.state.bullets : undefined
+    const note = {
+      title: this.state.title,
+      noteType: this.state.noteType,
+      text: this.state.noteType === 'note' ? this.state.text : undefined,
+      bullets: this.state.noteType === 'list' ? this.state.bullets : []
     };
-    const prevPoint = this.props.point ? {
-      name: this.props.point.name,
-      type: this.props.point.type,
-      text: this.props.point.text,
-      bullets: this.props.point.bullets
+    const prevNote = this.props.note ? {
+      title: this.props.note.title,
+      noteType: this.props.note.noteType,
+      text: this.props.note.text,
+      bullets: this.props.note.bullets
     } : undefined;
-    if (!this.props.point || !_.isEqual(prevPoint, point)) {
-      if (this.props.point && (this.props.point.type === 'note' ? this.state.text.length > 0 : this.state.bullets.length > 0)) {
-        this.props.editTopicPoint(point);
-      } else if ((this.state.type === 'note' && this.state.text.length > 0) || (this.state.type === 'list' && this.state.bullets.length > 0)) {
-        this.props.addTopicPoint(point);
+    if (!this.props.note || !_.isEqual(prevNote, note)) {
+      if (this.props.note && (this.props.note.noteType === 'note' ? this.state.text.length > 0 : this.state.bullets.length > 0)) {
+        this.props.editNote(this.props.note._id, note);
+      } else if ((this.state.noteType === 'note' && this.state.text.length > 0) || (this.state.noteType === 'list' && this.state.bullets.length > 0)) {
+        this.props.addNote({ ...note, topic_id: this.props.topic._id });
       }
     }
-    this.setState(() => ({ name: '', text: '', bullets: [] }));
+    this.setState(() => ({ title: '', text: '', bullets: [] }));
     this.props.onRequestClose();
   };
 
@@ -121,22 +122,22 @@ class NoteModal extends React.Component {
         isOpen={this.props.isModalOpen}
         onAfterOpen={this.handleAfterOpen}
         onRequestClose={this.handleRequestClose}
-        onHeaderTextChange={this.handleNameChange}
-        headerText={this.state.name}
-        headerPlaceholder={this.state.type}
+        onHeaderTextChange={this.handleTitleChange}
+        headerText={this.state.title}
+        headerPlaceholder={this.state.noteType}
         headerIcon="ion-md-bulb"
       >
         <form className="NoteForm" onSubmit={this.handleSubmit}>
-          {this.state.type === 'note' && (
+          {this.state.noteType === 'note' && (
             <Textarea
               placeholder="Lorem Ipsum.."
               value={this.state.text}
               onChange={this.handleTextChange}
               onFocus={this.handleFocus}
-              autoFocus={!this.props.point}
+              autoFocus={!this.props.note}
             />
           )}
-          {this.state.type === 'list' && (
+          {this.state.noteType === 'list' && (
             <ul>
               {this.state.bullets.map((bullet, index) => (
                 <li key={index} className="NoteForm__bullet">
@@ -161,19 +162,21 @@ class NoteModal extends React.Component {
                   placeholder="List item.."
                   value=''
                   onChange={this.handleAddBullet}
-                  autoFocus={!this.props.point}
+                  autoFocus={!this.props.note}
                 />
               </li>
             </ul>
           )}
         </form>
-        {this.props.point && (
+        {this.props.note && (
           <footer className="NoteForm__footer">
-            <div className="NoteForm__footerButton" onClick={this.openDeleteNoteModal}>
-              <div className="icon ion-md-trash" />
-            </div>
+            {this.props.isMe && (
+              <div className="NoteForm__footerButton" onClick={this.openDeleteNoteModal}>
+                <div className="icon ion-md-trash" />
+              </div>
+            )}
             <div className="NoteForm__footerInfoBox">
-              Edited {moment(this.props.point.lastUpdated).fromNow()}
+              Edited {moment(this.props.note.lastUpdated).fromNow()}
             </div>
           </footer>
         )}
@@ -188,10 +191,8 @@ class NoteModal extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addTopicPoint: (point) => dispatch(addTopicPoint(ownProps.topic.id, point)),
-  editTopicPoint: (updates) => dispatch(editTopicPoint(ownProps.topic.id, ownProps.point.id, updates)),
-  removeTopicPoint: () => dispatch(removeTopicPoint(ownProps.topic.id, ownProps.point))
+const mapStateToProps = (state, ownProps) => ({
+  isMe: !ownProps.match.params.username
 });
 
-export default connect(undefined, mapDispatchToProps)(NoteModal);
+export default withRouter(connect(mapStateToProps, { addNote, editNote, removeNote })(NoteModal));

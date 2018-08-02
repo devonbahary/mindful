@@ -1,0 +1,21 @@
+.UsersListItem {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  height: 3rem;
+  background: $bg-content;
+  @include box-shadow-gray();
+
+  .UsersListItem__button {
+    position: relative;
+    opacity: 0.6;
+
+    .icon {
+      @include center();
+      font-size: 24px;
+    }
+  }
+
+  .UsersListItem__contents {
+    line-height: 3rem;
+  }
+}

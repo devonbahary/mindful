@@ -44,5 +44,36 @@ router.get('/:id', (req, res) => {
     .catch(err => res.sendStatus(400));
 });
 
+// @route   PATCH /api/notes/:id
+// @desc    update existing Note
+// @acesss  private
+router.patch('/:id', authenticate, (req, res) => {
+  const updates = _.pick(req.body, ['title', 'text', 'noteType', 'bullets']);
+  Note.findById(req.params.id)
+    .then(note => {
+      if (note.owner_id.equals(req.user._id)) {
+        note.set(updates);
+        note.save().then(note => res.json(note));
+      } else {
+        res.sendStatus(403);
+      }
+    })
+    .catch(err => res.sendStatus(400));
+});
+
+// @route   DELETE /api/notes/:id
+// @desc    remove Note
+// @access  private
+router.delete('/:id', authenticate, (req, res) => {
+  Note.findById(req.params.id)
+    .then(note => {
+      if (note.owner_id.equals(req.user._id)) {
+        note.remove().then(() => res.sendStatus(200))
+      } else {
+        res.sendStatus(403);
+      }
+    })
+    .catch(err => res.sendStatus(404));
+});
 
 module.exports = router;

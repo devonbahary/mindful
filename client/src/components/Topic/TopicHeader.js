@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { setPointsFilter } from '../../actions/filters';
+import { setNotesFilter } from '../../actions/filters';
 import Header from '../Header';
 import SearchHeader from '../SearchHeader';
 import TopicHeaderPopup from './TopicHeaderPopup';
@@ -13,23 +13,27 @@ class TopicHeader extends React.Component {
   };
 
   handleMainButton = () => {
-    console.log('handleMainButtons')
     if (this.state.isSearch) {
       this.setState(() => ({ isSearch: false }));
-      this.props.setPointsFilter('');
+      this.props.setNotesFilter('');
     } else {
-      this.props.history.goBack();
+      const username = this.props.match.params.username;
+      if (username) {
+        this.props.history.push(`/users/${username}`);
+      } else {
+        this.props.history.push('/');
+      }
     }
   }
 
   handleOpenSearch = () => {
     this.setState(() => ({ isSearch: true }));
-    this.props.setPointsFilter('');
+    this.props.setNotesFilter('');
   };
 
-  handlePointsFilterTextChange = (e) => {
+  handleNotesFilterTextChange = (e) => {
     const searchText = e.target.value;
-    this.props.setPointsFilter(searchText);
+    this.props.setNotesFilter(searchText);
   };
 
   togglePopup = () => this.setState((prevState) => ({ isPopupOpen: !prevState.isPopupOpen }));
@@ -41,15 +45,15 @@ class TopicHeader extends React.Component {
 
   handleBlur = () => {
     this.setState(() => ({ isSearch: false }));
-    this.props.setPointsFilter('');
+    this.props.setNotesFilter('');
   }
 
   render() {
     if (this.state.isSearch) {
       return (
         <SearchHeader
-          searchValue={this.props.pointsFilter}
-          onSearchChange={this.handlePointsFilterTextChange}
+          searchValue={this.props.notesFilter}
+          onSearchChange={this.handleNotesFilterTextChange}
           onBlur={this.handleBlur}
           placeholder="search notes"
         />
@@ -59,14 +63,16 @@ class TopicHeader extends React.Component {
         <Header
           mainButtonIcon="ion-md-arrow-round-back"
           onMainButton={this.handleMainButton}
-          headerText={this.props.topic && this.props.topic.name}
+          headerText={this.props.title}
         >
-          <div
-            className={this.state.isPopupOpen ? "Header__button--active" : "Header__button"}
-            onClick={this.togglePopup}
-          >
-            <div className="icon ion-md-more" />
-          </div>
+          {!this.props.match.params.username && (
+            <div
+              className={this.state.isPopupOpen ? "Header__button--active" : "Header__button"}
+              onClick={this.togglePopup}
+            >
+              <div className="icon ion-md-more" />
+            </div>
+          )}
           <div
             className="Header__button"
             onClick={this.handleOpenSearch}
@@ -75,7 +81,6 @@ class TopicHeader extends React.Component {
           </div>
           {this.state.isPopupOpen && (
             <TopicHeaderPopup
-              topic={this.props.topic}
               openTopicEditModal={this.handleOpenTopicEditModal}
               onClose={this.togglePopup}
             />
@@ -86,12 +91,9 @@ class TopicHeader extends React.Component {
   };
 }
 
-const mapStateToProps = (state) => ({
-  pointsFilter: state.pointsFilter
+const mapStateToProps = (state, ownProps) => ({
+  notesFilter: state.filters.notes,
+  title: ownProps.match.params.title
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setPointsFilter: (text) => dispatch(setPointsFilter(text))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TopicHeader));
+export default withRouter(connect(mapStateToProps, { setNotesFilter })(TopicHeader));

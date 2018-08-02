@@ -28,6 +28,29 @@ describe('GET /api/users', () => {
   });
 });
 
+describe('GET /api/users/me', () => {
+  it('should return a user with valid auth token', done => {
+    request(app)
+      .get('/api/users/me')
+      .set('authorization', testUsers[0].tokens[0])
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        expect(res.body._id).toBe(testUsers[0]._id.toString());
+        expect(res.body.username).toBe(testUsers[0].username);
+        expect(res.body.topics).toEqual(testUsers[0].topics);
+        done();
+      });
+  });
+
+  it('should return a 403 with invalid auth token', done => {
+    request(app)
+      .get('/api/users/me')
+      .expect(403, done);
+  });
+});
+
 describe('GET /api/users/:username', () => {
   it('should return a user for a requested username', done => {
     request(app)
@@ -109,6 +132,51 @@ describe('POST /api/users', () => {
             done();
           });
       });
+  });
+});
+
+describe('POST /api/users/topics', () => {
+  it('should return user for valid credentials and data', done => {
+    const topic = { title: 'Batarangs 101' };
+    request(app)
+      .post('/api/users/topics')
+      .set('authorization', testUsers[0].tokens[0])
+      .send(topic)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        User.findById(testUsers[0]._id)
+          .then(user => {
+            expect(user.topics.length).toBe(testUsers[0].topics.length + 1);
+            expect(user.topics[user.topics.length - 1].title).toBe(topic.title);
+            done();
+          })
+          .catch(err => done(err));
+      });
+  });
+
+  it('should return 403 for invalid credentials', done => {
+    request(app)
+      .post('/api/users/topics')
+      .send({ title: 'Batarangs 101' })
+      .expect(403, done);
+  });
+
+  it('should return 400 for valid credentials but invalid data', done => {
+    request(app)
+      .post('/api/users/topics')
+      .set('authorization', testUsers[0].tokens[0])
+      .send({ })
+      .expect(400, done);
+  });
+
+  it('should return 400 for valid credentials and data, but a repeated topic title', done => {
+    request(app)
+      .post('/api/users/topics')
+      .set('authorization', testUsers[0].tokens[0])
+      .send({ title: testUsers[0].topics[0].title })
+      .expect(400, done);
   });
 });
 

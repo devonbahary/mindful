@@ -5,6 +5,7 @@ const path = require('path');
 require('./config/config');
 
 const users = require('./routes/api/users');
+const notes = require('./routes/api/notes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // use routes
 app.use('/api/users', users);
+app.use('/api/notes', notes);
 
 if (process.env.NODE_ENV === 'production') {
   // set static folder
