@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export default (prevState = initialState, action) => {
+  let notes;
   switch(action.type) {
     case 'LOAD_NOTES':
       return {
@@ -39,6 +40,30 @@ export default (prevState = initialState, action) => {
       return {
         ...prevState,
         notes: prevState.notes.filter(note => note._id !== action.id)
+      };
+    case 'ADD_NOTE_LOCAL':
+      notes = [ ...prevState.notes, action.note ];
+      localStorage.setItem('notes', JSON.stringify(notes));
+      return {
+        ...prevState,
+        notes
+      };
+    case 'EDIT_NOTE_LOCAL':
+      notes = prevState.notes.map(note => note._id === action.id ? {
+        ...note,
+        ...action.updates
+      } : note);
+      localStorage.setItem('notes', JSON.stringify(notes));
+      return {
+        ...prevState,
+        notes
+      };
+    case 'REMOVE_NOTE_LOCAL':
+      notes = prevState.notes.filter(note => note._id !== action.id);
+      localStorage.setItem('notes', JSON.stringify(notes));
+      return {
+        ...prevState,
+        notes
       };
     default:
       return prevState;

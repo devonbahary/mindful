@@ -11,13 +11,13 @@
     padding: $buffer-lg;
     padding-bottom: 1rem;
     font-size: 1.2rem;
+    text-align: center;
   }
 
   .ConfirmModal__footer {
     height: 3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
     .ConfirmModal__footerButton,
     .ConfirmModal__footerButton--confirm {
       background: none;
@@ -27,8 +27,19 @@
     }
 
     .ConfirmModal__footerButton {
+      border-top-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
+    .ConfirmModal__footerButton--confirm {
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    .ConfirmModal__footerButton {
       opacity: 0.6;
     }
+
     .ConfirmModal__footerButton--confirm {
       font-weight: bold;
       color: $bg-theme;

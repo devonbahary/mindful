@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadUsers } from '../../actions/users';
 import { setUsersFilter } from '../../actions/filters';
 import Header from '../Header';
 import SearchHeader from '../SearchHeader';
@@ -42,12 +41,6 @@ class UsersHeader extends React.Component {
           headerText="Users"
         >
           <div
-            className={this.props.isLoading ? "Header__button--disabled" : "Header__button"}
-            onClick={!this.props.isLoading ? this.props.loadUsers : () => {}}
-          >
-            <div className="icon ion-md-refresh" />
-          </div>
-          <div
             className="Header__button"
             onClick={this.handleOpenSearch}
           >
@@ -64,4 +57,4 @@ const mapStateToProps = state => ({
   isLoading: state.users.isLoading
 });
 
-export default connect(mapStateToProps, { loadUsers, setUsersFilter })(UsersHeader);
+export default connect(mapStateToProps, { setUsersFilter })(UsersHeader);

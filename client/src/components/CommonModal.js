@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#app');
 
-const Modal = ({
+const CommonModal = ({
   isOpen,
   onAfterOpen,
   onRequestClose,
@@ -16,11 +16,11 @@ const Modal = ({
   <ReactModal
     isOpen={isOpen}
     onAfterOpen={onAfterOpen}
-    className="Modal"
-    overlayClassName="ModalOverlay"
+    className="CommonModal"
+    overlayClassName="CommonModalOverlay"
     onRequestClose={onRequestClose}
   >
-    <header className="Modal__header">
+    <header className="CommonModal__header">
       <input
         type="text"
         placeholder={headerPlaceholder ? headerPlaceholder.charAt(0).toUpperCase() + headerPlaceholder.substr(1) : headerText}
@@ -28,12 +28,12 @@ const Modal = ({
         onChange={onHeaderTextChange}
         readOnly={!onHeaderTextChange}
       />
-      <div className="Modal__headerIcon">
+      <div className="CommonModal__headerIcon">
         <div className={`icon ${headerIcon}`} />
       </div>
     </header>
     {children}
-    <footer className="Modal__footer">
+    <footer className="CommonModal__footer">
       <button type="button" onClick={onRequestClose}>
         Close
       </button>
@@ -41,4 +41,4 @@ const Modal = ({
   </ReactModal>
 );
 
-export default Modal;
+export default CommonModal;

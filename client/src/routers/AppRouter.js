@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadUser } from '../actions/user';
+import { logInUser } from '../actions/user';
 import { loadUsers } from '../actions/users';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Users from '../components/Users/Users';
@@ -10,7 +10,7 @@ import NotFoundPage from '../components/NotFoundPage';
 
 class AppRouter extends React.Component {
   componentDidMount() {
-    this.props.loadUser();
+    this.props.logInUser();
     this.props.loadUsers();
   };
 
@@ -33,4 +33,4 @@ class AppRouter extends React.Component {
   }
 }
 
-export default connect(undefined, { loadUser, loadUsers })(AppRouter);
+export default connect(undefined, { logInUser, loadUsers })(AppRouter);

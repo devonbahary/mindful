@@ -15,7 +15,8 @@
     opacity: 0.6;
   }
 
-  .AddTopic__input {
+  .AddTopic__input,
+  .AddTopic__input--duplicateTitle {
     line-height: 4rem;
     font-size: 1.2rem;
     font-weight: bold;
@@ -23,7 +24,12 @@
     border: none;
   }
 
-  .AddTopic__input:focus {
+  .AddTopic__input--duplicateTitle {
+    color: $duplicate-entry-color;
+  }
+
+  .AddTopic__input:focus,
+  .AddTopic__input--duplicateTitle:focus {
     outline: none;
   }
 
@@ -40,6 +46,7 @@
   }
 
   .AddTopic__input,
+  .AddTopic__input--duplicateTitle,
   .AddTopic__button {
     background-color: $bg-content;
   }

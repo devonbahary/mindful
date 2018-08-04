@@ -1,0 +1,176 @@
+.LogInModal {
+  position: absolute;
+  top: 50%; right: 0; left: 0;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  padding: $buffer-lg;
+
+  .LogInModal__header {
+    position: relative;
+    height: 8rem;
+
+    .icon,
+    .icon--signup {
+      @include center();
+      color: $bg-content;
+      font-size: 96px;
+    }
+
+    .icon {
+      text-shadow: 0 0 10px $bg-theme;
+    }
+
+    .icon--signUp {
+      text-shadow: 0 0 50px $bg-theme;
+    }
+  }
+
+  .LogInModal__form,
+  .LogInModal__form--loading {
+    input {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: $buffer-lg;
+      background: $bg-content;
+      border: 1px solid $bg-background;
+      padding: 0 $buffer-sm;
+      height: 2.5rem;
+      width: 60%;
+      text-align: center;
+      border-radius: 4px;
+      @include box-shadow-gray();
+    }
+
+    input:focus {
+      border: 1px solid $theme-color;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      display: block;
+      height: 3rem;
+      background: $bg-theme;
+      color: white;
+      border: 1px solid $bg-theme;
+      @include box-shadow-gray();
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:focus {
+      @include box-shadow-theme();
+    }
+
+    input.--passwordErr {
+      @include box-shadow-err();
+      -webkit-animation: shake ease-out 0.25s;
+              animation: shake ease-out 0.25s;
+    }
+
+    .LogInModal__formToggle {
+      width: 40%;
+      margin: 0 auto;
+      height: 2rem;
+      text-align: center;
+      color: $theme-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.LogInModal__form--loading {
+  visibility: hidden;
+
+  .LoadingSpinner {
+    visibility: visible;
+  }
+}
+
+.LogInModal:focus {
+  outline: none;
+}
+
+.LogInModalOverlay {
+  position: fixed;
+  background: $bg-overlay-dark;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+@media only screen and (min-width: 768px) {
+  .LogInModal {
+    right: 10%; left: 10%;
+  }
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(-6px);
+        -ms-transform: translateX(-6px);
+            transform: translateX(-6px);
+  }
+  50% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+  75% {
+    -webkit-transform: translateX(6px);
+        -ms-transform: translateX(6px);
+            transform: translateX(6px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(-6px);
+        -ms-transform: translateX(-6px);
+            transform: translateX(-6px);
+  }
+  50% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+  75% {
+    -webkit-transform: translateX(6px);
+        -ms-transform: translateX(6px);
+            transform: translateX(6px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .LogInModal {
+    left: 10%;
+    right: 10%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .LogInModal {
+    left: 20%;
+    right: 20%;
+  }
+}

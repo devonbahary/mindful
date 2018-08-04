@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 64px 1fr;
   height: 3rem;
-  background: $bg-content;
+  background: rgba($bg-content, 0.8);
   @include box-shadow-gray();
 
   .UsersListItem__button {

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = (props) => (
   <header className="Header">
-    <div className="Header__mainButton" onClick={props.onMainButton}>
+    <div className={props.onMainButton ? "Header__mainButton" : "Header__mainButton--disable"} onClick={props.onMainButton}>
       <div className={`icon ${props.mainButtonIcon}`} />
     </div>
     <div className="Header__contents">

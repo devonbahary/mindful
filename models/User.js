@@ -7,7 +7,9 @@ const TopicSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    minlength: 1
+    minlength: 1,
+    unique: true,
+    match: /^[a-zA-Z0-9-_.+!*'() ]+$/
   }
 });
 
@@ -61,6 +63,17 @@ UserSchema.statics.findByCredentials = function(username, password) {
     })
 };
 
+UserSchema.path('topics').validate(function(value) {
+  let seen = {};
+  return !this.topics.some(topic => {
+    if (seen[topic.title]) {
+      return true;
+    } else {
+      seen[topic.title] = true;
+    }
+  });
+});
+
 UserSchema.pre('save', function (next) {
   const user = this;
   if (this.isModified('password')) {
@@ -74,7 +87,6 @@ UserSchema.pre('save', function (next) {
     next();
   }
 });
-
 
 UserSchema.methods.generateAuthToken = function () {
   const user = this;

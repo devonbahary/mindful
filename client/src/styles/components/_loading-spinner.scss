@@ -2,19 +2,10 @@
   @include center();
   width: 4rem;
   height: 4rem;
-  border: 12px solid gray;
-  border-top: 12px solid $bg-theme;
+  border: 6px solid gray;
+  border-top: 6px solid $bg-theme;
   border-radius: 50%;
   animation: rotate 0.75s infinite linear;
-  @include box-shadow-gray();
-
-  .LoadingSpinner__inner {
-    @include center();
-    background: $bg-background;
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-  }
 }
 
 @keyframes rotate {

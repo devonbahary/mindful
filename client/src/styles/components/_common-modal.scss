@@ -1,4 +1,4 @@
-.Modal {
+.CommonModal {
   position: absolute;
   top: 50%; right: 0; left: 0;
   -webkit-transform: translateY(-50%);
@@ -6,7 +6,7 @@
   @include box-shadow-gray();
   background: $bg-content;
 
-  .Modal__header {
+  .CommonModal__header {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 64px;
@@ -28,7 +28,7 @@
       outline: none;
     }
 
-    .Modal__headerIcon {
+    .CommonModal__headerIcon {
       position: relative;
 
       .icon {
@@ -38,7 +38,7 @@
     }
   }
 
-  .Modal__footer {
+  .CommonModal__footer {
     height: 2rem;
     background: $bg-content;
 
@@ -55,11 +55,11 @@
   }
 }
 
-.Modal:focus {
+.CommonModal:focus {
   outline: none;
 }
 
-.ModalOverlay {
+.CommonModalOverlay {
   position: absolute;
   background: $bg-overlay;
   width: 100vw;
@@ -68,7 +68,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .Modal {
+  .CommonModal {
     right: 10%; left: 10%;
   }
 }

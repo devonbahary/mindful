@@ -1,11 +1,13 @@
 import axios from 'axios';
+import uuid from 'uuid';
 
 // LOAD_NOTES
 export const loadNotes = userId => dispatch => {
-  dispatch({
-    type: 'LOAD_NOTES'
-  });
-  axios
+  if (userId) {
+    dispatch({
+      type: 'LOAD_NOTES'
+    });
+    axios
     .get(`/api/notes/${userId}`)
     .then(res => dispatch(loadNotesSuccess(res.data)))
     .catch(err => {
@@ -17,6 +19,10 @@ export const loadNotes = userId => dispatch => {
         dispatch(loadNotesFail(err.message));
       }
     });
+  } else {
+    const notes = localStorage.getItem('notes');
+    dispatch(loadNotesSuccess(notes ? JSON.parse(notes) : []));
+  }
 };
 
 // LOAD_NOTES_SUCCESS
@@ -94,5 +100,27 @@ export const removeNote = id => dispatch => {
 // REMOVE_NOTE_SUCCESS
 export const removeNoteSuccess = id => ({
   type: 'REMOVE_NOTE_SUCCESS',
+  id
+});
+
+// ADD_NOTE_LOCAL
+export const addNoteLocal = note => ({
+  type: 'ADD_NOTE_LOCAL',
+  note: {
+    ...note,
+    _id: uuid()
+  }
+});
+
+// EDIT_NOTE_LOCAL
+export const editNoteLocal = (id, updates) => ({
+  type: 'EDIT_NOTE_LOCAL',
+  updates,
+  id
+});
+
+// REMOVE_NOTE_LOCAL
+export const removeNoteLocal = id => ({
+  type: 'REMOVE_NOTE_LOCAL',
   id
 });

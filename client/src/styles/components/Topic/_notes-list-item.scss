@@ -1,11 +1,11 @@
 .NotesListItem {
-  background: $bg-content;
   margin: $buffer-lg;
   @include box-shadow-gray();
   border-radius: 2px;
   cursor: pointer;
 
   .NotesListItem__header {
+    position: relative;
     min-height: 1.5rem;
     background: $bg-background;
     letter-spacing: 1px;
@@ -16,8 +16,8 @@
 
   .NotesListItem__body {
     padding: $buffer-sm $buffer-lg;
-    opacity: 0.8;
     white-space: pre-wrap;
+    background: rgba($bg-content, 0.8);
 
     .NotesListItem__list {
       .NotesListItem__listItem {

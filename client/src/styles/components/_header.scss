@@ -10,7 +10,8 @@
           transition: background-color 0.25s ease-out;
   z-index: 2;
 
-  .Header__mainButton {
+  .Header__mainButton,
+  .Header__mainButton--disable {
     position: relative;
 
     .icon {
@@ -18,6 +19,10 @@
       font-size: 32px;
       opacity: 0.6;
     }
+  }
+
+  .Header__mainButton {
+    cursor: pointer;
   }
 
   .Header__contents {
@@ -31,8 +36,7 @@
       top: 0; right: 0; bottom: 0; left: 0;
 
       .Header__button,
-      .Header__button--active,
-      .Header__button--disabled {
+      .Header__button--active {
         position: relative;
         float: right;
         width: 3rem;
@@ -50,14 +54,6 @@
 
         .icon {
           color: white;
-        }
-      }
-
-      .Header__button--disabled {
-        opacity: 0.6;
-
-        .icon {
-          color: gray;
         }
       }
     }

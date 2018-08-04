@@ -3,10 +3,10 @@ import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { addNote, editNote, removeNote } from '../../actions/notes';
+import { addNote, editNote, removeNote, addNoteLocal, editNoteLocal, removeNoteLocal } from '../../actions/notes';
 import Textarea from 'react-textarea-autosize';
-import ConfirmModal from './ConfirmModal';
-import Modal from '../Modal';
+import ConfirmModal from '../ConfirmModal';
+import CommonModal from '../CommonModal';
 
 class NoteModal extends React.Component {
   state = {
@@ -82,7 +82,11 @@ class NoteModal extends React.Component {
   handleRequestCloseDeleteNoteModal = () => this.setState(() => ({ isDeleteNoteModalOpen: false }));
 
   handleConfirmDeleteNoteModal = () => {
-    this.props.removeNote(this.props.note._id);
+    if (this.props.isSignedIn) {
+      this.props.removeNote(this.props.note._id);
+    } else {
+      this.props.removeNoteLocal(this.props.note._id);
+    }
     this.props.onRequestClose();
     this.setState(() => ({
       title: '',
@@ -107,9 +111,18 @@ class NoteModal extends React.Component {
     } : undefined;
     if (!this.props.note || !_.isEqual(prevNote, note)) {
       if (this.props.note && (this.props.note.noteType === 'note' ? this.state.text.length > 0 : this.state.bullets.length > 0)) {
-        this.props.editNote(this.props.note._id, note);
+        if (this.props.isSignedIn) {
+          this.props.editNote(this.props.note._id, note);
+        } else {
+          this.props.editNoteLocal(this.props.note._id, note);
+        }
       } else if ((this.state.noteType === 'note' && this.state.text.length > 0) || (this.state.noteType === 'list' && this.state.bullets.length > 0)) {
-        this.props.addNote({ ...note, topic_id: this.props.topic._id });
+        const newNote = { ...note, topic_id: this.props.topic._id };
+        if (this.props.isSignedIn) {
+          this.props.addNote(newNote);
+        } else {
+          this.props.addNoteLocal(newNote);
+        }
       }
     }
     this.setState(() => ({ title: '', text: '', bullets: [] }));
@@ -118,7 +131,7 @@ class NoteModal extends React.Component {
 
   render() {
     return (
-      <Modal
+      <CommonModal
         isOpen={this.props.isModalOpen}
         onAfterOpen={this.handleAfterOpen}
         onRequestClose={this.handleRequestClose}
@@ -186,13 +199,14 @@ class NoteModal extends React.Component {
           onConfirm={this.handleConfirmDeleteNoteModal}
           prompt="Delete this note?"
         />
-      </Modal>
+      </CommonModal>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isMe: !ownProps.match.params.username
+  isMe: !ownProps.match.params.username,
+  isSignedIn: state.user.isSignedIn
 });
 
-export default withRouter(connect(mapStateToProps, { addNote, editNote, removeNote })(NoteModal));
+export default withRouter(connect(mapStateToProps, { addNote, editNote, removeNote, addNoteLocal, editNoteLocal, removeNoteLocal })(NoteModal));

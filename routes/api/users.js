@@ -78,7 +78,7 @@ router.post('/login', (req, res) => {
     .then(user => {
       return user.generateAuthToken().then(token => {
         res.header('authorization', token);
-        res.send(user.toJSON());
+        res.json(user.toJSON());
       });
     })
     .catch(err => res.sendStatus(401));
@@ -104,7 +104,6 @@ router.patch('/topics/:id', authenticate, (req, res) => {
   const updates = _.pick(req.body, ['title']);
   const topic = req.user.topics.id(req.params.id);
   if (topic) {
-    console.log(updates);
     topic.set(updates);
     req.user.save()
       .then(user => res.json(user.toJSON()))
@@ -112,6 +111,16 @@ router.patch('/topics/:id', authenticate, (req, res) => {
   } else {
     res.sendStatus(400);
   }
+});
+
+// @route   DELETE /api/users/topics/:id
+// @desc    remove User Topic
+// @access  private
+router.delete('/topics/:id', authenticate, (req, res) => {
+  req.user.topics.id(req.params.id).remove();
+  req.user.save()
+    .then(user => res.json(user.toJSON()))
+    .catch(err => res.sendStatus(400));
 });
 
 // @route   DELETE /api/users/logout

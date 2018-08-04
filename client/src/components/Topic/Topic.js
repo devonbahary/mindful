@@ -20,7 +20,7 @@ class Topic extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.user) {
+    if (this.props.user && this.props.notes.length === 0) {
       this.props.loadNotes(this.props.user._id);
     } else if (!this.props.user && !this.props.isLoading) {
       this.props.history.push('/users');
@@ -44,7 +44,13 @@ class Topic extends React.Component {
 
   handleCloseTopicEditModal = (newTopicTitle) => {
     this.setState(() => ({ isTopicEditModalOpen: false }));
-    setTimeout(() => this.props.history.push(`/topics/${newTopicTitle}`), 0);
+    if (newTopicTitle) {
+      if (this.props.isSignedIn) {
+        setTimeout(() => this.props.history.push(`/topics/${newTopicTitle}`), 0);
+      } else {
+        this.props.history.push(`/topics/${newTopicTitle}`);
+      }
+    }
   };
 
   handleOpenNoteModal = (e, note, { type } = {}) => this.setState(() => ({
@@ -104,6 +110,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
       isLoading: state.users.isLoading || state.notes.isLoading,
       topic: user ? user.topics.find(topic => topic.title === topicTitle) : undefined,
+      notes: state.notes.notes,
       user
     };
   } else {
@@ -111,7 +118,9 @@ const mapStateToProps = (state, ownProps) => {
       isLoading: state.user.isLoading,
       topic: state.user.user.topics.find(topic => topic.title === topicTitle),
       user: state.user.user,
-      isMe: true
+      notes: state.notes.notes,
+      isMe: true,
+      isSignedIn: state.user.isSignedIn
     };
   }
 };

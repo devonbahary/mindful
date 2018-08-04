@@ -1,5 +1,5 @@
 .TopicListItem {
-  background: $bg-content;
+  background: rgba($bg-content, 0.8);
   min-height: 4rem;
   @include box-shadow-gray();
   display: grid;

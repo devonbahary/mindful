@@ -1,7 +1,8 @@
 .TopicEditForm {
   background: $bg-content;
 
-  input {
+  .TopicEditForm__input,
+  .TopicEditForm__input--duplicate {
     line-height: 4rem;
     border: none;
     font-size: 1.2rem;
@@ -11,7 +12,12 @@
     background: $bg-content;
   }
 
-  input:focus {
+  .TopicEditForm__input--duplicate {
+    color: $duplicate-entry-color;
+  }
+
+  .TopicEditForm__input:focus,
+  .TopicEditForm__input--duplicate:focus {
     outline: none;
   }
 }

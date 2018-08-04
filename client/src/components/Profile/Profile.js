@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { loadNotes } from '../../actions/notes';
 import AddTopic from './AddTopic';
 import AppNav from '../AppNav';
 import BackgroundIcon from '../BackgroundIcon';
@@ -9,21 +10,28 @@ import ProfileHeader from './ProfileHeader';
 import TopicsList from './TopicsList';
 
 class Profile extends React.Component {
+  componentDidMount() {
+    if (this.props.user) {
+      this.props.loadNotes(this.props.user._id);
+    }
+  };
+
   componentDidUpdate(prevProps) {
     if (prevProps.isLoading && !this.props.isLoading) {
-      if (!this.props.user) {
+      if (!this.props.user && !this.props.isMe) {
         this.props.history.push('/users');
       }
+    } else if (prevProps.user !== this.props.user) {
+      this.props.loadNotes(this.props.user._id);
     }
   };
 
   render() {
-    const isMe = !this.props.match.params.username;
     return (
       <div className="Profile">
         <ProfileHeader />
-        {isMe && <AddTopic />}
-        <div className={isMe ? "Profile__contents--me" : "Profile__contents"}>
+        {this.props.isMe && <AddTopic />}
+        <div className={this.props.isMe ? "Profile__contents--me" : "Profile__contents"}>
           {this.props.isLoading ? (
             <LoadingSpinner />
           ) : (
@@ -43,7 +51,9 @@ const mapStateToProps = (state, ownProps) => {
   let username = ownProps.match.params.username;
   if (!username) {
     return {
-      isLoading: false
+      isLoading: state.user.isLoading,
+      user: state.user.user,
+      isMe: true
     };
   } else {
     return {
@@ -53,4 +63,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps)(Profile));
+export default withRouter(connect(mapStateToProps, { loadNotes })(Profile));

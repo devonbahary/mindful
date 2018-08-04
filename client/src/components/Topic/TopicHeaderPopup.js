@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { removeTopic } from '../../actions/user';
-import ConfirmModal from './ConfirmModal';
+import { removeTopic, removeTopicLocal } from '../../actions/user';
+import ConfirmModal from '../ConfirmModal';
 
 class TopicHeaderPopup extends React.Component {
   state = {
@@ -12,8 +12,17 @@ class TopicHeaderPopup extends React.Component {
   openDeleteTopicModal = () => this.setState(() => ({ isDeleteTopicModalOpen: true }));
 
   handleConfirmDeleteTopicModal = () => {
-    this.props.removeTopic(this.props.topic._id);
-    this.props.history.goBack();
+    if (this.props.isSignedIn) {
+      this.props.removeTopic(this.props.topic._id);
+    } else {
+      this.props.removeTopicLocal(this.props.topic._id);
+    }
+    const username = this.props.match.params.username;
+    if (!username) {
+      this.props.history.push('/');
+    } else {
+      this.props.history.push(`/users/${username}`);
+    }
   };
 
   handleRequestCloseDeleteTopicModal = () => {
@@ -60,8 +69,13 @@ class TopicHeaderPopup extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  removeTopic: (topic) => dispatch(removeTopic(topic))
-});
+const mapStateToProps = (state, ownProps) => {
+  const topicTitle = ownProps.match.params.title;
+  const topic = state.user.user.topics.find(topic => topic.title === topicTitle);
+  return {
+    topic,
+    isSignedIn: state.user.isSignedIn
+  };
+};
 
-export default connect(undefined, mapDispatchToProps)(withRouter(TopicHeaderPopup));
+export default withRouter(connect(mapStateToProps, { removeTopic, removeTopicLocal })(TopicHeaderPopup));

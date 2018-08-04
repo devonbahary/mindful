@@ -2,9 +2,11 @@
 @import './base/base.scss';
 @import './components/_app-nav.scss';
 @import './components/_background-icon.scss';
+@import './components/_common-modal.scss';
+@import './components/_confirm-modal.scss';
 @import './components/_header.scss';
 @import './components/_loading-spinner.scss';
-@import './components/_modal.scss';
+@import './components/_log-in-modal.scss';
 @import './components/_not-found-page.scss';
 @import './components/_search-header.scss';
 @import './components/Users/_users.scss';
@@ -13,7 +15,6 @@
 @import './components/Profile/_profile.scss';
 @import './components/Profile/_topics-list.scss';
 @import './components/Profile/_topic-list-item.scss';
-@import './components/Topic/_confirm-modal.scss';
 @import './components/Topic/_note-form.scss';
 @import './components/Topic/_notes-list-item.scss';
 @import './components/Topic/_notes-list.scss';

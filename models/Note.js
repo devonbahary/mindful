@@ -7,12 +7,8 @@ const NoteSchema = new mongoose.Schema({
   },
   noteType: {
     type: 'String',
-    required: true,
-    validate: {
-      validator: function (value) {
-        return (value === 'note' || value === 'list') ? Promise.resolve() : Promise.reject();
-      }
-    }
+    enum: ['note', 'list'],
+    required: true
   },
   text: {
     type: 'String'

@@ -1,9 +1,7 @@
 import React from 'react';
 
 const LoadingSpinner = () => (
-  <div className="LoadingSpinner">
-    <div className="LoadingSpinner__inner" />
-  </div>
+  <div className="LoadingSpinner" />
 );
 
 export default LoadingSpinner;

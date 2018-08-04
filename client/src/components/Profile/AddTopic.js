@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTopic } from '../../actions/user';
+import { addTopic, addTopicLocal } from '../../actions/user';
 
 class AddTopic extends React.Component {
   state = {
     isOpen: false,
-    text: '',
+    title: '',
     isDisabled: false
   };
 
@@ -17,19 +17,24 @@ class AddTopic extends React.Component {
     this.mounted = false;
   };
 
-  handleTextChange = (e) => {
-    const text = e.target.value;
-    const alreadyHas = this.props.topics.some(topic => topic.title === text);
+  handleTitleChange = (e) => {
+    const title = e.target.value.split('').filter(a => a.match(/[a-zA-Z0-9-_.+!*'() ]/)).join('');
+    const alreadyHas = this.props.topics.some(topic => topic.title === title);
     this.setState(() => ({
-      text,
+      title,
       isDisabled: alreadyHas
     }));
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addTopic({ title: this.state.text });
-    this.setState(() => ({ text: '', isDisabled: false }));
+    const topic = { title: this.state.title };
+    if (this.props.isSignedIn) {
+      this.props.addTopic(topic);
+    } else {
+      this.props.addTopicLocal(topic);
+    }
+    this.setState(() => ({ title: '', isDisabled: false }));
     this.inputNode.blur();
   };
 
@@ -42,7 +47,7 @@ class AddTopic extends React.Component {
       if (this.mounted) {
         this.setState(() => ({
           isOpen: false,
-          text: '',
+          title: '',
           isDisabled: false
         }));
       }
@@ -50,6 +55,7 @@ class AddTopic extends React.Component {
   };
 
   render() {
+    const isDuplicate = this.props.topics.some(topic => topic.title === this.state.title);
     return (
       <form
         className="AddTopic"
@@ -64,10 +70,10 @@ class AddTopic extends React.Component {
         <input
           id="title"
           type="text"
-          className="AddTopic__input"
+          className={isDuplicate ? "AddTopic__input--duplicateTitle" : "AddTopic__input"}
           ref={ref => this.inputNode = ref}
-          value={this.state.text}
-          onChange={this.handleTextChange}
+          value={this.state.title}
+          onChange={this.handleTitleChange}
           onFocus={this.handleFocus}
           placeholder={this.state.isOpen ? "" : "Add new topic"}
           required
@@ -85,7 +91,8 @@ class AddTopic extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  topics: state.user.user.topics
+  topics: state.user.user.topics,
+  isSignedIn: state.user.isSignedIn
 });
 
-export default connect(mapStateToProps, { addTopic })(AddTopic);
+export default connect(mapStateToProps, { addTopic, addTopicLocal })(AddTopic);

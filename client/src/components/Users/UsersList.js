@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import selectUsers from '../../selectors/users';
 import UsersListItem from './UsersListItem';
 
 const UsersList = ({ users, isLoading }) => (
@@ -11,7 +12,7 @@ const UsersList = ({ users, isLoading }) => (
 );
 
 const mapStateToProps = state => ({
-  users: state.users.users.filter(user => user._id !== state.user.user._id),
+  users: selectUsers(state.users.users.filter(user => user._id !== state.user.user._id), state.filters.users),
   isLoading: state.users.isLoading
 });
 
