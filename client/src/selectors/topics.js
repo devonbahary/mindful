@@ -1,1 +1,1 @@
-export default (topics, text) => topics.filter(topic => topic.name.match(new RegExp(text, 'i')));
+export default (topics, text) => topics.filter(topic => topic.title.match(new RegExp(text, 'i')));

@@ -10,16 +10,19 @@ const testUsers = [{
   _id: userOneId,
   username: 'Batman',
   password: 'gotham',
+  topics: [],
   tokens: [jwt.sign({ _id: userOneId, username: 'Batman' }, process.env.SECRET_KEY)]
 }, {
   _id: userTwoId,
   username: 'Superman',
   password: 'metropolis',
+  topics: [],
   tokens: [jwt.sign({ _id: userTwoId, username: 'Superman' }, process.env.SECRET_KEY)]
 }, {
   _id: userThreeId,
   username: 'Green Lantern',
   password: 'coast city',
+  topics: [],
   tokens: [jwt.sign({ _id: userThreeId, username: 'Green Lantern' }, process.env.SECRET_KEY)]
 }];
 

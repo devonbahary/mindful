@@ -1,0 +1,23 @@
+.LoadingSpinner {
+  @include center();
+  width: 4rem;
+  height: 4rem;
+  border: 6px solid gray;
+  border-top: 6px solid $bg-theme;
+  border-radius: 50%;
+  animation: rotate 0.75s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+        -ms-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        -ms-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

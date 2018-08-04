@@ -1,0 +1,19 @@
+.Profile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .Profile__contents,
+  .Profile__contents--me {
+    position: fixed;
+    right: 0; bottom: 3rem; left: 0;
+  }
+
+  .Profile__contents {
+    top: 3rem;
+  }
+
+  .Profile__contents--me {
+    top: 7rem;
+  }
+}

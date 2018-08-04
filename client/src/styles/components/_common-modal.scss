@@ -1,0 +1,74 @@
+.CommonModal {
+  position: absolute;
+  top: 50%; right: 0; left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  @include box-shadow-gray();
+  background: $bg-content;
+
+  .CommonModal__header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 64px;
+    height: 3rem;
+    background: $bg-background;
+    font-size: 1.2rem;
+    line-height: 3rem;
+    @include box-shadow-gray();
+    z-index: 1;
+
+    input {
+      padding-left: $buffer-sm;
+      border: none;
+      background: $bg-background;
+      letter-spacing: 1px;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .CommonModal__headerIcon {
+      position: relative;
+
+      .icon {
+        @include center();
+        font-size: 24px;
+      }
+    }
+  }
+
+  .CommonModal__footer {
+    height: 2rem;
+    background: $bg-content;
+
+    button {
+      float: right;
+      background: none;
+      border: none;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      line-height: 2rem;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+  }
+}
+
+.CommonModal:focus {
+  outline: none;
+}
+
+.CommonModalOverlay {
+  position: absolute;
+  background: $bg-overlay;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+@media only screen and (min-width: 768px) {
+  .CommonModal {
+    right: 10%; left: 10%;
+  }
+}

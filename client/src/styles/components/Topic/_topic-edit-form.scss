@@ -1,0 +1,23 @@
+.TopicEditForm {
+  background: $bg-content;
+
+  .TopicEditForm__input,
+  .TopicEditForm__input--duplicate {
+    line-height: 4rem;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: $buffer-lg;
+    width: 100%;
+    background: $bg-content;
+  }
+
+  .TopicEditForm__input--duplicate {
+    color: $duplicate-entry-color;
+  }
+
+  .TopicEditForm__input:focus,
+  .TopicEditForm__input--duplicate:focus {
+    outline: none;
+  }
+}

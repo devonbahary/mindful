@@ -1,8 +1,12 @@
-$bg-theme: #FFBB00;
+$theme-color: #FFBB00;
+$duplicate-entry-color: #D9534F;
+
+$bg-theme: $theme-color;
 $bg-background: #E8E8E8;
 $bg-content: #FAFAFA;
 $bg-content-hover: #E6E6E6;
 $bg-overlay: rgba(50, 50, 50, 0.2);
+$bg-overlay-dark: rgba(25, 25, 25, 0.8);
 
 $buffer-sm: 6px;
 $buffer-lg: 12px;
@@ -10,6 +14,14 @@ $buffer-xl: 32px;
 
 @mixin box-shadow-gray() {
   box-shadow: 0 0 5px gray;
+}
+
+@mixin box-shadow-theme() {
+  box-shadow: 0 0 5px $theme-color;
+}
+
+@mixin box-shadow-err() {
+  box-shadow: 0 0 15px red;
 }
 
 @mixin box-shadow-gray-lg() {
@@ -20,5 +32,6 @@ $buffer-xl: 32px;
   position: absolute;
   top: 50%; left: 50%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }

@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { logInUser } from '../actions/user';
+import { loadUsers } from '../actions/users';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { fetchTopics } from '../actions/topics';
-import Dashboard from '../components/Dashboard/Dashboard';
-import Topic from '../components/Topics/Topic';
+import Users from '../components/Users/Users';
+import Profile from '../components/Profile/Profile';
+import Topic from '../components/Topic/Topic';
 import NotFoundPage from '../components/NotFoundPage';
 
 class AppRouter extends React.Component {
-  componentWillMount() {
-    this.props.fetchTopics();
+  componentDidMount() {
+    this.props.logInUser();
+    this.props.loadUsers();
   };
 
   render() {
@@ -16,8 +19,12 @@ class AppRouter extends React.Component {
       <BrowserRouter>
         <main id="main-content">
           <Switch>
-            <Route path='/' exact component={Dashboard} />
-            <Route path='/topics/:id' component={Topic} />
+            {/* key="me/user" is to trigger re-render for update-blocking components from react-router */}
+            <Route key="me" path='/' exact component={Profile} />
+            <Route path='/topics/:title' component={Topic} />
+            <Route path='/users/:username/topics/:title' component={Topic} />
+            <Route key="user" path='/users/:username' component={Profile} />
+            <Route path='/users' component={Users} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>
@@ -26,8 +33,4 @@ class AppRouter extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchTopics: () => dispatch(fetchTopics())
-});
-
-export default connect(undefined, mapDispatchToProps)(AppRouter);
+export default connect(undefined, { logInUser, loadUsers })(AppRouter);

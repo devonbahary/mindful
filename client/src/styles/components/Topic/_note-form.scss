@@ -1,0 +1,78 @@
+.NoteForm {
+  position: relative;
+  padding: $buffer-lg;
+  background: $bg-content;
+  max-height: 200px;
+  overflow-y: scroll;
+
+  ul {
+    .NoteForm__bullet {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      margin-bottom: $buffer-sm;
+
+      .NoteForm__bulletIcon {
+        position: relative;
+
+        .icon {
+          @include center();
+          font-size: 8px;
+        }
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+    background: $bg-content;
+    border: none;
+    white-space: pre-wrap;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 0;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+
+  textarea:focus {
+    outline: none;
+  }
+}
+
+.NoteForm__footer {
+  position: relative;
+  height: 2.5rem;
+  background: $bg-content;
+
+  .NoteForm__footerButton {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    height: 100%;
+    cursor: pointer;
+
+    .icon {
+      @include center();
+      font-size: 24px;
+      opacity: 0.6;
+    }
+  }
+
+  .NoteForm__footerInfoBox {
+    position: absolute;
+    top: 0; right: $buffer-sm;
+    opacity: 0.4;
+    font-style: italic;
+    line-height: 2.5rem;
+  }
+}
+
+.NoteForm::-webkit-scrollbar {
+  background: rgba(25, 25, 25, 0.1);
+}
+
+.NoteForm::-webkit-scrollbar-thumb {
+  width: 24px;
+  background: rgba(25, 25, 25, 0.2);
+}

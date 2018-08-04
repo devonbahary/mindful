@@ -1,0 +1,62 @@
+.Header {
+  background: $bg-theme;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  height: 3rem;
+  @include box-shadow-gray-lg();
+  -webkit-transition: background-color 0.25s ease-out;
+          transition: background-color 0.25s ease-out;
+  z-index: 2;
+
+  .Header__mainButton,
+  .Header__mainButton--disable {
+    position: relative;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+      opacity: 0.6;
+    }
+  }
+
+  .Header__mainButton {
+    cursor: pointer;
+  }
+
+  .Header__contents {
+    position: relative;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    line-height: 3rem;
+
+    .Header__buttons {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+
+      .Header__button,
+      .Header__button--active {
+        position: relative;
+        float: right;
+        width: 3rem;
+        height: 100%;
+        cursor: pointer;
+
+        .icon {
+          @include center();
+          font-size: 24px;
+        }
+      }
+
+      .Header__button--active {
+        background: rgba(255, 255, 255, 0.1);
+
+        .icon {
+          color: white;
+        }
+      }
+    }
+
+  }
+}

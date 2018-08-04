@@ -1,0 +1,50 @@
+.NotesListItem {
+  margin: $buffer-lg;
+  @include box-shadow-gray();
+  border-radius: 2px;
+  cursor: pointer;
+
+  .NotesListItem__header {
+    position: relative;
+    min-height: 1.5rem;
+    background: $bg-background;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: $buffer-sm;
+    @include box-shadow-gray();
+  }
+
+  .NotesListItem__body {
+    padding: $buffer-sm $buffer-lg;
+    white-space: pre-wrap;
+    background: rgba($bg-content, 0.8);
+
+    .NotesListItem__list {
+      .NotesListItem__listItem {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        margin-bottom: $buffer-sm;
+
+        .NotesListItem__listItemBullet {
+          position: relative;
+
+          .icon {
+            @include center();
+            font-size: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .NotesListItem {
+    min-height: 4rem;
+    margin: $buffer-lg $buffer-xl;
+  }
+
+  .NotesListItem:hover {
+    @include box-shadow-gray-lg();
+  }
+}

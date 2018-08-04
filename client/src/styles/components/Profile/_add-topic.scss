@@ -1,0 +1,53 @@
+.AddTopic {
+  position: fixed;
+  top: 3rem; right: 0; left: 0;
+  height: 4rem;
+  @include box-shadow-gray-lg();
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  margin-bottom: 1rem;
+  z-index: 1;
+
+  .AddTopic__label {
+    position: absolute;
+    top: $buffer-sm; left: $buffer-sm;
+    font-weight: bold;
+    opacity: 0.6;
+  }
+
+  .AddTopic__input,
+  .AddTopic__input--duplicateTitle {
+    line-height: 4rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: $buffer-lg;
+    border: none;
+  }
+
+  .AddTopic__input--duplicateTitle {
+    color: $duplicate-entry-color;
+  }
+
+  .AddTopic__input:focus,
+  .AddTopic__input--duplicateTitle:focus {
+    outline: none;
+  }
+
+  .AddTopic__button {
+    position: relative;
+    border: none;
+    cursor: pointer;
+
+    .icon {
+      @include center();
+      font-size: 32px;
+      opacity: 0.4;
+    }
+  }
+
+  .AddTopic__input,
+  .AddTopic__input--duplicateTitle,
+  .AddTopic__button {
+    background-color: $bg-content;
+  }
+}
