@@ -6,7 +6,7 @@ const Header = (props) => (
       <div className={`icon ${props.mainButtonIcon}`} />
     </div>
     <div className="Header__contents">
-      {props.headerText}
+      {props.headerText.length < 18 ? props.headerText : props.headerText.slice(0, 16).concat('...')}
       <div className="Header__buttons">
         {props.children}
       </div>

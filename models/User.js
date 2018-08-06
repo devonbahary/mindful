@@ -8,6 +8,7 @@ const TopicSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 1,
+    maxlength: 24,
     unique: true,
     match: /^[a-zA-Z0-9-_.+!*'() ]+$/
   }
@@ -19,7 +20,8 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     required: true,
-    minlength: 4
+    minlength: 4,
+    maxlength: 12
   },
   password: {
     type: String,

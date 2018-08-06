@@ -26,6 +26,12 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .TopicListItem {
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 4px;
+  }
+
   .TopicListItem:hover {
     @include box-shadow-gray-lg();
   }

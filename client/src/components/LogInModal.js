@@ -80,6 +80,7 @@ class LogInModal extends React.Component {
             onChange={this.handleUsernameChange}
             placeholder="username"
             minLength="2"
+            maxLength="12"
             required
           />
           <input

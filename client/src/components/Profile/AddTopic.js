@@ -76,6 +76,8 @@ class AddTopic extends React.Component {
           onChange={this.handleTitleChange}
           onFocus={this.handleFocus}
           placeholder={this.state.isOpen ? "" : "Add new topic"}
+          minLength="1"
+          maxLength="24"
           required
         />
         <button
