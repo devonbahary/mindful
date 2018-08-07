@@ -96,6 +96,7 @@ export const logOutUser = () => dispatch => {
         type: 'LOG_OUT_USER'
       });
       localStorage.removeItem('authToken');
+      delete axios.defaults.headers.common['authorization'];
       dispatch(logInUser());
     });
 };

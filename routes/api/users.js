@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
         res.json(user.toJSON())
       });
     })
-    .catch(err => res.sendStatus(400));
+    .catch(err => { console.log(err); res.sendStatus(400); });
 });
 
 // @route   POST /api/users/topics

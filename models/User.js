@@ -9,7 +9,6 @@ const TopicSchema = new mongoose.Schema({
     required: true,
     minlength: 1,
     maxlength: 24,
-    unique: true,
     match: /^[a-zA-Z0-9-_.+!*'() ]+$/
   }
 });
