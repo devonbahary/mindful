@@ -23,7 +23,7 @@ const CommonModal = ({
     <header className="CommonModal__header">
       <input
         type="text"
-        placeholder={headerPlaceholder ? headerPlaceholder.charAt(0).toUpperCase() + headerPlaceholder.substr(1) : headerText}
+        placeholder="Title"
         value={headerText}
         onChange={onHeaderTextChange}
         readOnly={!onHeaderTextChange}

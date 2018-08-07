@@ -4,6 +4,7 @@
   height: 3rem;
   background: rgba($bg-content, 0.8);
   @include box-shadow-gray();
+  transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
 
   .UsersListItem__button {
     position: relative;
@@ -23,5 +24,11 @@
 @media only screen and (min-width: 768px) {
   .UsersListItem {
     margin: 0 5%;
+    background: rgba($bg-content, 0.6);
+  }
+
+  .UsersListItem:hover {
+    background: rgba($bg-content, 0.8);
+    @include box-shadow-gray-lg();
   }
 }

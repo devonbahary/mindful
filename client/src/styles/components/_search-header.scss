@@ -1,6 +1,6 @@
 .SearchHeader {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 4rem 1fr;
   position: fixed;
   top: 0; right: 0; left: 0;
   background: $bg-content;
@@ -43,5 +43,11 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .SearchHeader {
+    grid-template-columns: 5rem 1fr;
   }
 }

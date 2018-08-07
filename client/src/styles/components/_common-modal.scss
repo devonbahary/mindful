@@ -5,6 +5,7 @@
           transform: translateY(-50%);
   @include box-shadow-gray();
   background: $bg-content;
+  border-radius: 4px;
 
   .CommonModal__header {
     position: relative;
@@ -16,6 +17,8 @@
     line-height: 3rem;
     @include box-shadow-gray();
     z-index: 1;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 
     input {
       padding-left: $buffer-sm;
