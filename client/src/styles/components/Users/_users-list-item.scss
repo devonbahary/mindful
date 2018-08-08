@@ -5,6 +5,8 @@
   background: rgba($bg-content, 0.8);
   @include box-shadow-gray();
   transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  -webkit-animation: appear 0.25s ease-out;
+          animation: appear 0.25s ease-out;
 
   .UsersListItem__button {
     position: relative;
@@ -18,6 +20,24 @@
 
   .UsersListItem__contents {
     line-height: 3rem;
+  }
+}
+
+@-webkit-keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
