@@ -5,6 +5,8 @@
   cursor: pointer;
   transition: box-shadow 0.1s ease-out;
   background: rgba($bg-content, 0.8);
+  -webkit-animation: appear 0.25s ease-out;
+          animation: appear 0.25s ease-out;
 
   .NotesListItem__header {
     position: relative;
@@ -41,6 +43,24 @@
 
 .NotesListItem:hover {
   @include box-shadow-gray-lg();
+}
+
+@-webkit-keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media only screen and (min-width: 768px) {
