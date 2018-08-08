@@ -2,9 +2,19 @@
 
 > A journaling app to document your varying pursuits of interest!
 
+![Adding a Topic in Noteable](/assets2/gif/AddTopic.gif)
+
+## Update (8/07/2018)
+> Noteable now features a back-end.
+
+
+### New features
+- Make an account
+- View other users and what they're learning
+
 ![Adding a Topic in Noteable](/assets/gif/AddTopicMobile.gif)
 
-## Many Interests, One Place to Track Them
+## Many Interests, One Place to Track Them <a name="priordocs" />
 
 It's no secret I carry notebooks in my backpack. Each one has a piece of tape on the front with a sharpie label: *[48 Laws of Power](https://en.wikipedia.org/wiki/The_48_Laws_of_Power)*, *React*, *[Self-Reliance](https://en.wikipedia.org/wiki/Self-Reliance)*, *Node*, etc.
 

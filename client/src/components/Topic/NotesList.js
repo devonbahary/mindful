@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
     topic = state.user.user.topics.find(topic => topic.title === topicTitle);
 
     return {
-      notes: topic ? selectNotes(state.notes.notes.filter(note => note.topic_id === topic._id)) : []
+      notes: topic ? selectNotes(state.notes.notes.filter(note => note.topic_id === topic._id), state.filters.notes) : []
     };
   }
 };
