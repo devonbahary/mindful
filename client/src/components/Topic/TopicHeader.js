@@ -45,7 +45,7 @@ class TopicHeader extends React.Component {
 
   handleBlur = () => {
     this.setState(() => ({ isSearch: false }));
-    this.props.setNotesFilter('');
+    setTimeout(() => this.props.setNotesFilter(''), 0);
   }
 
   render() {
