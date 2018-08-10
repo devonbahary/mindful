@@ -2,42 +2,105 @@
 
 > A journaling app to document your varying pursuits of interest!
 
-![Adding a Topic in Noteable](/assets2/gif/AddTopic.gif)
+![Adding a Topic in Noteable](/assets2/gif/Showcase.gif)
+
+---
 
 ## Update (8/07/2018)
 > Noteable now features a back-end.
 
 
 ### New features
-- Make an account
+- Make an account (login/logout/signup)
 - View other users and what they're learning
 
-![Adding a Topic in Noteable](/assets/gif/AddTopicMobile.gif)
+---
 
-## Many Interests, One Place to Track Them <a name="priordocs" />
+## Many Interests, One Place to Track Them
+
+![Adding a Topic in Noteable](/assets2/gif/AddTopic.gif)
 
 It's no secret I carry notebooks in my backpack. Each one has a piece of tape on the front with a sharpie label: *[48 Laws of Power](https://en.wikipedia.org/wiki/The_48_Laws_of_Power)*, *React*, *[Self-Reliance](https://en.wikipedia.org/wiki/Self-Reliance)*, *Node*, etc.
 
-I'm a practitioner of **writing down findings related to my various topics of interest**. I feel like they stick better in my memory that way, and instead of trying to recall something from a vague page number and parsing through all the dense information, I can just reach for the appropriate notebook and scan through an organized list of notable findings.
+I'm a practitioner of **writing down findings related to my various topics of interest**. I feel like they stick better in my memory that way, and its way easier to backtrack to an idea you wrote down than to flip through pages in a book.
 
-Since I was already doing this with old-fashioned pen and paper, I figured why not **make an app to explore how to make this better**?
+Since I was already doing this with old-fashioned pen and paper, I figured why not **make an app to explore how to make this better?**
 
-### Create Topics
-![Noteable Dashboard](/assets/img/DashboardMobile.png)
+[Noteable](http://noteable1.herokuapp.com/) is the idea I came up with.
+
+---
+
+## How's it Work?
+### Topics
+![Noteable Dashboard](/assets2/img/Topics.png)
 
 **[Noteable](http://noteable1.herokuapp.com/)** starts with **Topics**.
 
-Got a new interest? Create a new **topic**.
+Got a new interest? Add a new **topic**.
 
-### Take Notes
+### Notes
 
-![Noteable Topic](/assets/img/TopicMobile.png)
+![Adding a note in Noteable](/assets2/gif/AddNote.gif)
 
-Scroll through the list of **notes** you've taken about the topic, or use the **search function** to narrow down what you're looking for.
+A note can be a **note** or a **list**.
 
-**Notes** can be in the form of **text** or a **list**, with or without a title (for further organization).
+---
 
-![Noteable Note](/assets/img/ListMobile.png)
+## User Authentication (8/07/2018 Update &darr; )
+![Signing up in Noteable](/assets2/gif/SignUp.gif)
+
+#### Make an account to:
+- maintain your notes across multiple devices
+- participate in the community of [Noteable](http://noteable1.herokuapp.com/) users
+
+
+## Community
+![Community in Noteable](/assets2/gif/Users.gif)
+#### Learning Together
+[Noteable](http://noteable1.herokuapp.com/) strives to be a place where **you** can jot down your thoughts and discoveries, but also where **friends** can keep up with each other's findings.
+
+Here's how [Noteable](http://noteable1.herokuapp.com/) plans to expand this idea in the near-future:
+- **Comment** on a friend's note to contribute to the idea, or just to let him/her know you like it!
+- Get **notified** when your friends add new notes.
+- Of course, the option to have **private topics** that are for your eyes only.
+
+---
+
+## The Technical Stuff
+[Noteable](http://noteable1.herokuapp.com/) was made using the **MERN stack**.
+- **M**ongoDB/Mongoose (tested with `mocha`)
+- **E**xpress
+- **R**eact/Redux
+- **N**ode
+
+The **front-end** was assembled from my [React-Redux starting template](https://github.com/devonbahary/react-redux-starter-template).
+
+The **back-end** was assembled from my [MERN stack starting template](https://github.com/devonbahary/mern-template).
+
+In this way, I've built and configured [Noteable](http://noteable1.herokuapp.com/) from scratch.
+
+#### MongoDB
+- 3 schemas (User, Topic, Note)
+- Custom validation (find duplicate element; O(n) complexity)
+- `bcrypt` hashed passwords so that sensitive data is never stored on the server
+- `jsonwebtoken` to validate user sessions
+
+
+#### Express
+- Custom authentication middleware for private routes
+- API endpoints at `/api/users` and `/api/notes`
+- Serves up client-side code for all other requests
+
+#### React/Redux
+- `axios` API calls from action generators
+- `redux-thunk` for asynchronous Redux actions
+
+#### Node
+- Client-side build with Webpack
+
+---
+
+## UI Design
 
 ### Modeling After Successful Implementations
 
@@ -45,33 +108,22 @@ Scroll through the list of **notes** you've taken about the topic, or use the **
 
 In fact, I've modeled **[Noteable](http://noteable1.herokuapp.com/)** after the UI design of **Google Keep**.
 
-![Comparison with Google Keep](/assets/img/SideBySide.png)
+![Comparison with Google Keep](/assets2/img/Wireframe1.png)
 
-Developing **[Noteable](http://noteable1.herokuapp.com/)** has been a fun exercise in taking a polished UI design and mocking it up from scratch.
+Developing **[Noteable](http://noteable1.herokuapp.com/)** has been a fun exercise in borrowing from a polished UI design and reiterating it from scratch.
 
-![Comparison with Google Keep](/assets/img/SideBySideNote.png)
+![Comparison with Google Keep](/assets2/img/Wireframe2.png)
 
-It's even been inspiring in moments when I found myself lacking artistic creativity (don't tell anyone, but I'm much better at copying from something pretty than reliably coming up with something pretty on my own)!
+---
 
+## Noteable vs. Google Keep
 
-### Making It My Own
+I've admitted to using **Google Keep**, but it functions best as a digital notepad.
 
-I've admitted to using **Google Keep**, but it functions best as a digital Post-it note collection rather than a means of **organizing disparate information**.
+With **Google Keep**, you're given one notepad and have the option to create endless notes.
 
-If you want to organize your information in **Google Keep** such that all notes related to one another is in one accessible place, your best bet is to keep **ALL** of that information in **ONE** note and title it appropriately.
+If you want to keep track of a large list of related information, your best bet is to title a note appropriately and overflow the note with all of that information.
 
-Clearly this gets **long** and **unparseable**.
+With **[Noteable](http://noteable1.herokuapp.com/)**, you're offered endless *notepads* (via Topics), and can make each note as arbitrarily concise or long as you'd like to.
 
-This inspired the idea of **topics** in **[Noteable](http://noteable1.herokuapp.com/)**, and is where **[Noteable](http://noteable1.herokuapp.com/)** takes its departure from **Google Keep**: each **topic** serves as a sort-of fresh page of **Google Keep**, and each **note** then serves as its own instance of information.
-
-This way **all my related information belongs in one topic**, but each note can serve as its own unit of information!
-
-### Where To Go From Here
-
-My girlfriend's recently far surpassed me in her book-reading: she's reading a whopping one book every month. I totally encourage this habit, and I find myself **benefiting from it too** because I ask her on a regular basis what interesting things she's learned from her last readings.
-
-And so it came to me: **what if you could share your findings with others as you came across them?**
-
-I think this could add a **social element** to **[Noteable](http://noteable1.herokuapp.com/)** for those who would be interested in opting in to it!
-- Give an interesting fact your friend just uploaded a **nod**, or even **write a message** in response to it!
-- Keep up to date with whatever your close circle is currently exploring and **learn together** in proximal collaboration!
+And now (8/07/2018), you can view what others are learning!
