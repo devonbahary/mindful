@@ -20,29 +20,29 @@
 
 ![Adding a Topic in Noteable](/assets2/gif/AddTopic.gif)
 
-It's no secret I carry notebooks in my backpack. Each one has a piece of tape on the front with a sharpie label: *[48 Laws of Power](https://en.wikipedia.org/wiki/The_48_Laws_of_Power)*, *React*, *[Self-Reliance](https://en.wikipedia.org/wiki/Self-Reliance)*, *Node*, etc.
-
 I'm a practitioner of **writing down findings related to my various topics of interest**. I feel like they stick better in my memory that way, and its way easier to backtrack to an idea you wrote down than to flip through pages in a book.
 
 Since I was already doing this with old-fashioned pen and paper, I figured why not **make an app to explore how to make this better?**
 
-[Noteable](http://noteable1.herokuapp.com/) is the idea I came up with.
-
----
+**[Noteable](http://noteable1.herokuapp.com/)** is the idea I came up with.
 
 ## How's it Work?
-### Topics
 ![Noteable Dashboard](/assets2/img/Topics.png)
 
 **[Noteable](http://noteable1.herokuapp.com/)** starts with **Topics**.
 
-Got a new interest? Add a new **topic**.
+Got a new interest? Add a new Topic.
+
+Think of it like a folder to hold all of your **Notes**.
+
+Notes go inside your Topics.
+
 
 ### Notes
 
 ![Adding a note in Noteable](/assets2/gif/AddNote.gif)
+A Note can be **text** or a **list**.
 
-A note can be a **note** or a **list**.
 
 ---
 
@@ -51,13 +51,13 @@ A note can be a **note** or a **list**.
 
 #### Make an account to:
 - maintain your notes across multiple devices
-- participate in the community of [Noteable](http://noteable1.herokuapp.com/) users
+- participate in the community of **[Noteable](http://noteable1.herokuapp.com/)** users
 
 
 ## Community
 ![Community in Noteable](/assets2/gif/Users.gif)
 #### Learning Together
-[Noteable](http://noteable1.herokuapp.com/) strives to be a place where **you** can jot down your thoughts and discoveries, but also where **friends** can keep up with each other's findings.
+**[Noteable](http://noteable1.herokuapp.com/)** strives to be a place where **you** can jot down your thoughts and discoveries, but also where **friends** can keep up with each other's findings.
 
 Here's how [Noteable](http://noteable1.herokuapp.com/) plans to expand this idea in the near-future:
 - **Comment** on a friend's note to contribute to the idea, or just to let him/her know you like it!
@@ -67,15 +67,14 @@ Here's how [Noteable](http://noteable1.herokuapp.com/) plans to expand this idea
 ---
 
 ## The Technical Stuff
-[Noteable](http://noteable1.herokuapp.com/) was made using the **MERN stack**.
+**[Noteable](http://noteable1.herokuapp.com/)** was built with the **MERN stack**.
 - **M**ongoDB/Mongoose (tested with `mocha`)
 - **E**xpress
 - **R**eact/Redux
 - **N**ode
 
-The **front-end** was assembled from my [React-Redux starting template](https://github.com/devonbahary/react-redux-starter-template).
+The **front-** and **back-end** were assembled from my [React-Redux starting template](https://github.com/devonbahary/react-redux-starter-template) and [MERN stack starting template](https://github.com/devonbahary/mern-template), respectively.
 
-The **back-end** was assembled from my [MERN stack starting template](https://github.com/devonbahary/mern-template).
 
 In this way, I've built and configured [Noteable](http://noteable1.herokuapp.com/) from scratch.
 
@@ -98,8 +97,6 @@ In this way, I've built and configured [Noteable](http://noteable1.herokuapp.com
 #### Node
 - Client-side build with Webpack
 
----
-
 ## UI Design
 
 ### Modeling After Successful Implementations
@@ -114,8 +111,6 @@ Developing **[Noteable](http://noteable1.herokuapp.com/)** has been a fun exerci
 
 ![Comparison with Google Keep](/assets2/img/Wireframe2.png)
 
----
-
 ## Noteable vs. Google Keep
 
 I've admitted to using **Google Keep**, but it functions best as a digital notepad.
@@ -126,4 +121,4 @@ If you want to keep track of a large list of related information, your best bet 
 
 With **[Noteable](http://noteable1.herokuapp.com/)**, you're offered endless *notepads* (via Topics), and can make each note as arbitrarily concise or long as you'd like to.
 
-And now (8/07/2018), you can view what others are learning!
+And now (as of 8/07/2018), you can view what others are learning!
