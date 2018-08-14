@@ -39,7 +39,7 @@ describe('POST /api/notes', () => {
         Note
           .find()
           .then(notes => {
-            expect(notes.length).toBe(testNotes.length + 1);
+            expect(notes).toHaveLength(testNotes.length + 1);
             done();
           });
       });
@@ -64,34 +64,15 @@ describe('POST /api/notes', () => {
   });
 });
 
-describe('GET /api/notes/me', () => {
-  it('should return all notes belonging to signed in user', done => {
-    request(app)
-      .get('/api/notes/me')
-      .set('authorization', testUsers[0].tokens[0])
-      .expect(200)
-      .end((err, res) => {
-        expect(res.body.length).toBe(testNotes.filter(note => note.owner_id === testUsers[0]._id).length);
-        expect(res.body[0].owner_id).toBe(testUsers[0]._id.toString());
-        done();
-      });
-  });
-
-  it('should return 403 without valid auth', done => {
-    request(app)
-      .get('/api/notes/me')
-      .expect(403, done);
-  });
-});
-
 describe('GET /api/notes/:id', () => {
   it('should return all notes belonging to a particular user', done => {
     request(app)
-      .get(`/api/notes/${testUsers[1]._id}`)
+      .get(`/api/notes/${testUsers[0]._id}`)
       .expect(200)
       .end((err, res) => {
-        expect(res.body.length).toBe(testNotes.filter(note => note.owner_id === testUsers[1]._id).length);
-        expect(res.body[0].owner_id).toBe(testUsers[1]._id.toString());
+        if (err) return done(err);
+        expect(res.body).toHaveLength(testNotes.filter(note => note.owner_id === testUsers[0]._id).length);
+        expect(res.body[0].owner_id).toBe(testUsers[0]._id.toString());
         done();
       });
   });
@@ -100,5 +81,60 @@ describe('GET /api/notes/:id', () => {
     request(app)
       .get(`/api/notes/${testUsers[1]._id + 1}`)
       .expect(400, done);
+  });
+});
+
+describe('PATCH /api/notes/:id', () => {
+  it('should return 403 for invalid auth', done => {
+    const updates = { title: 'New Title' };
+    request(app)
+      .patch(`/api/notes/${testNotes[0]._id}`)
+      .set('authorization', testUsers[2].tokens[0])
+      .send(updates)
+      .expect(403, done);
+  });
+
+  it('should return updated note with valid auth', done => {
+    const title = 'New Title';
+    const text = 'New text';
+    const authToken = testUsers.find(user => user._id === testNotes[0].owner_id).tokens[0];
+    request(app)
+      .patch(`/api/notes/${testNotes[0]._id}`)
+      .set('authorization', authToken)
+      .send({ title, text })
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.title).toBe(title);
+        expect(res.body.text).toBe(text);
+        done();
+      });
+  });
+});
+
+describe('DELETE /api/notes/:id', () => {
+  it('should return 403 for invalid auth', done => {
+    request(app)
+      .delete(`/api/notes/${testNotes[0]._id}`)
+      .set('authorization', testUsers[2].tokens[0])
+      .expect(403, done);
+  });
+
+  it('should remove note for valid auth', done => {
+    const authToken = testUsers.find(user => user._id === testNotes[0].owner_id).tokens[0];
+    request(app)
+      .delete(`/api/notes/${testNotes[0]._id}`)
+      .set('authorization', authToken)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        Note.find({})
+          .then(notes => {
+            expect(notes).toHaveLength(testNotes.length - 1);
+            expect(notes.some(note => note._id === testNotes[0]._id)).toBe(false);
+            done();
+          })
+          .catch(err => done(err));
+      });
   });
 });

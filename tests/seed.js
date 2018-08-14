@@ -6,11 +6,16 @@ const userOneId = ObjectID();
 const userTwoId = ObjectID();
 const userThreeId = ObjectID();
 
+const userOneTopicOneId = ObjectID();
+
 const testUsers = [{
   _id: userOneId,
   username: 'Batman',
   password: 'gotham',
-  topics: [],
+  topics: [{
+    _id: userOneTopicOneId,
+    title: 'Batarangs 101'
+  }],
   tokens: [jwt.sign({ _id: userOneId, username: 'Batman' }, process.env.SECRET_KEY)]
 }, {
   _id: userTwoId,
@@ -26,7 +31,7 @@ const testUsers = [{
   tokens: [jwt.sign({ _id: userThreeId, username: 'Green Lantern' }, process.env.SECRET_KEY)]
 }];
 
-const populateUsers = (done) => {
+const populateUsers = done => {
   User
     .remove({})
     .then(() => {
@@ -39,5 +44,23 @@ const populateUsers = (done) => {
     .then(() => done());
 };
 
+const testNotes = [{
+  _id: ObjectID(),
+  noteType: 'note',
+  text: 'Batman is the coolest superhero.',
+  owner_id: userOneId,
+  topic_id: userOneTopicOneId
+}];
 
-module.exports = { testUsers, populateUsers };
+const populateNotes = done => {
+  Note
+    .remove({})
+    .then(() => {
+      const noteOne = new Note(testNotes[0]);
+
+      return Promise.all([noteOne.save()]);
+    })
+    .then(() => done());
+};
+
+module.exports = { testUsers, populateUsers, testNotes, populateNotes };

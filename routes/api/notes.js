@@ -25,15 +25,6 @@ router.post('/', authenticate, (req, res) => {
     .catch(err => { res.sendStatus(400);});
 });
 
-// @route   GET /api/notes/me
-// @desc    get all Notes belonging to signed-in user
-// @access  private
-router.get('/me', authenticate, (req, res) => {
-  Note
-    .find({ owner_id: req.user._id })
-    .then(notes => res.json(notes));
-});
-
 // @route   GET /api/notes/:id
 // @desc    get all Notes belonging to User w/id
 // @access  public
@@ -48,7 +39,7 @@ router.get('/:id', (req, res) => {
 // @desc    update existing Note
 // @acesss  private
 router.patch('/:id', authenticate, (req, res) => {
-  const updates = _.pick(req.body, ['title', 'text', 'noteType', 'bullets']);
+  const updates = _.pick(req.body, ['title', 'text', 'bullets']);
   Note.findById(req.params.id)
     .then(note => {
       if (note.owner_id.equals(req.user._id)) {

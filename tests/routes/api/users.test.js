@@ -39,7 +39,8 @@ describe('GET /api/users/me', () => {
 
         expect(res.body._id).toBe(testUsers[0]._id.toString());
         expect(res.body.username).toBe(testUsers[0].username);
-        expect(res.body.topics).toEqual(testUsers[0].topics);
+        expect(res.body.topics[0]._id).toBe(testUsers[0].topics[0]._id.toString());
+        expect(res.body.topics[0].title).toBe(testUsers[0].topics[0].title);
         done();
       });
   });
@@ -48,20 +49,6 @@ describe('GET /api/users/me', () => {
     request(app)
       .get('/api/users/me')
       .expect(403, done);
-  });
-});
-
-describe('GET /api/users/:username', () => {
-  it('should return a user for a requested username', done => {
-    request(app)
-      .get(`/api/users/${testUsers[0].username}`)
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.body.username).toBe(testUsers[0].username);
-        expect(res.body._id).toBe(testUsers[0]._id.toString());
-        done();
-      });
   });
 });
 
@@ -87,7 +74,7 @@ describe('POST /api/users', () => {
         User
           .find()
           .then(users => {
-            expect(users.length).toBe(testUsers.length + 1);
+            expect(users).toHaveLength(testUsers.length + 1);
             done();
           });
       });
@@ -137,7 +124,7 @@ describe('POST /api/users', () => {
 
 describe('POST /api/users/topics', () => {
   it('should return user for valid credentials and data', done => {
-    const topic = { title: 'Batarangs 101' };
+    const topic = { title: 'Gotham History' };
     request(app)
       .post('/api/users/topics')
       .set('authorization', testUsers[0].tokens[0])
@@ -216,35 +203,25 @@ describe('POST /api/users/login', () => {
   });
 });
 
-describe('DELETE /api/users/:id', () => {
-  it('should delete User w/valid auth token', done => {
+describe('PATCH /api/users/topics/:id', () => {
+  it('should return 403 for invalid auth', done => {
     request(app)
-      .delete(`/api/users/${testUsers[1]._id}`)
+      .patch(`/api/users/topics/${testUsers[0].topics[0]._id}`)
       .set('authorization', testUsers[1].tokens[0])
+      .expect(403, done);
+  });
+
+  it('should return updates user for valid auth', done => {
+    const title = 'New Topic Title';
+    request(app)
+      .patch(`/api/users/topics/${testUsers[0].topics[0]._id}`)
+      .set('authorization', testUsers[0].tokens[0])
+      .send({ title })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-
-        User
-          .find()
-          .then(users => {
-            expect(users.length).toBe(testUsers.length - 1);
-            done();
-          })
-      });
-  });
-
-  it('should return 403 for request to delete User w/invalid auth token', done => {
-    request(app)
-      .delete(`/api/users/${testUsers[1]._id}`)
-      .expect(403)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        User.find().then(users => {
-          expect(users.length).toBe(testUsers.length);
-          done();
-        });
+        expect(res.body.topics[0].title).toBe(title);
+        done();
       });
   });
 });

@@ -79,8 +79,8 @@ class LogInModal extends React.Component {
             value={this.state.username}
             onChange={this.handleUsernameChange}
             placeholder="username"
-            minLength="2"
-            maxLength="12"
+            minLength="4"
+            maxLength="16"
             required
           />
           <input

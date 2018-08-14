@@ -5,36 +5,6 @@ const authenticate = require('../middleware/authenticate');
 
 const router = express.Router();
 
-// @route   GET /api/users
-// @desc    get all Users
-// @access  public
-router.get('/', (req, res) => {
-  User.find()
-    .sort({ username: 1 }) // ascending order by username
-    .then(users => res.json(users.map(user => user.toJSON())));
-});
-
-// @route   GET /api/users/me
-// @desc    get your User
-// @access  private
-router.get('/me', authenticate, (req, res) => {
-  res.json(req.user.toJSON());
-});
-
-// @route   GET /api/users/:username
-// @desc    get all Users
-// @access  public
-router.get('/:username', (req, res) => {
-  User
-    .findOne({ username: req.params.username })
-    .then(user => {
-      if (!user) {
-        res.sendStatus(400);
-      }
-      res.json(user);
-    });
-});
-
 // @route   POST /api/users
 // @desc    create new User
 // @access  public
@@ -84,33 +54,41 @@ router.post('/login', (req, res) => {
     .catch(err => res.sendStatus(401));
 });
 
-// @route   PATCH /api/samples/:id
-// @desc    update Sample
+// @route   GET /api/users
+// @desc    get all Users
 // @access  public
-// router.patch('/:id', (req, res) => {
-//   const updates = _.pick(req.body, ['name']);
-//   Sample.findById(req.params.id)
-//     .then(sample => {
-//       sample.set(updates);
-//       sample.save().then(sample => res.json(sample));
-//     })
-//     .catch(err => res.sendStatus(404));
-// });
+router.get('/', (req, res) => {
+  User.find()
+    .sort({ username: 1 }) // ascending order by username
+    .then(users => res.json(users.map(user => user.toJSON())));
+});
+
+// @route   GET /api/users/me
+// @desc    get your User
+// @access  private
+router.get('/me', authenticate, (req, res) => {
+  res.json(req.user.toJSON());
+});
 
 // @route   PATCH /api/users/topics/:id
 // @desc    update User Topic
 // @access  private
 router.patch('/topics/:id', authenticate, (req, res) => {
-  const updates = _.pick(req.body, ['title']);
-  const topic = req.user.topics.id(req.params.id);
-  if (topic) {
-    topic.set(updates);
-    req.user.save()
-      .then(user => res.json(user.toJSON()))
-      .catch(err => res.sendStatus(400));
-  } else {
-    res.sendStatus(400);
-  }
+  User
+    .findOne({ 'topics._id': req.params.id })
+    .then(user => {
+      if (user._id.equals(req.user._id)) {
+        const topic = user.topics.id(req.params.id);
+        const updates = _.pick(req.body, ['title']);
+        topic.set(updates);
+        user.save()
+          .then(user => res.json(user.toJSON()))
+          .catch(err => res.sendStatus(400));
+      } else {
+        res.sendStatus(403);
+      }
+    })
+    .catch(err => res.sendStatus(400));
 });
 
 // @route   DELETE /api/users/topics/:id
